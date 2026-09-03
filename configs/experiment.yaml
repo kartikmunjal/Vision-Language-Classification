@@ -1,0 +1,25 @@
+seed: 2026
+human_validation_size: 180
+bootstrap_replicates: 2000
+confidence_level: 0.95
+blur_bands:
+  low: [0.0, 40.0]
+  medium: [40.0, 80.0]
+  high: [80.0, .inf]
+caption_length_bins: [0, 8, 16, 32, .inf]
+ensemble:
+  abstain_threshold: 0.5
+  sources: [rules, llm, clip]
+active_correction:
+  fractions: [0.05, 0.10, 0.20]
+  random_repetitions: 100
+preregistered_primary_endpoint: macro_ece_change
+preregistered_flagged_slice:
+  blur_band: low
+  texture_band: low
+model:
+  architecture: resnet18
+  pretrained: true
+  epochs: 10
+  batch_size: 64
+  learning_rate: 0.0003

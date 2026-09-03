@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vision-language-classification"
+version = "0.1.0"
+description = "Auditable multimodal weak supervision with calibration and active correction"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Kartik Munjal", email = "kartikmunjal19@gmail.com"}]
+dependencies = ["numpy>=1.24", "pandas>=2.0", "Pillow>=9.5", "PyYAML>=6.0"]
+
+[project.optional-dependencies]
+train = ["torch>=2.1", "torchvision>=0.16", "open-clip-torch>=2.24", "transformers>=4.38"]
+plots = ["matplotlib>=3.7"]
+dev = ["pytest>=7.4", "ruff>=0.4"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

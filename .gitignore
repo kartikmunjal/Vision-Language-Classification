@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.venv/
+data/raw/
+data/processed/
+data/cache/
+checkpoints/
+results/*
+!results/.gitkeep
+!data/annotations/.gitkeep
+*.pt
+*.pth
+*.onnx
+*.egg-info/
+.env

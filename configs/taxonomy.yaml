@@ -1,0 +1,20 @@
+version: 1
+tasks:
+  multiple_subjects:
+    negative: single_or_no_subject
+    positive: multiple_subjects
+  outdoor:
+    negative: indoor
+    positive: outdoor
+  human_present:
+    negative: no_human
+    positive: human_present
+  animal_present:
+    negative: no_animal
+    positive: animal_present
+  dynamic_scene:
+    negative: static_scene
+    positive: dynamic_scene
+  night:
+    negative: day_or_indoor_lit
+    positive: night

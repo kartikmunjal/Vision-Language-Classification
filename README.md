@@ -1,0 +1,106 @@
+# Vision-Language Classification
+
+An auditable weak-supervision pipeline for six visual attributes. It extends
+the frame captions and quality metadata produced by
+`Video-Curation`, then asks whether caption rules, a text-only LLM, and an
+image-only CLIP labeler fail on the same quality-sensitive slice.
+
+Author: Kartik Munjal
+
+## Research design
+
+The fixed tasks are `multiple_subjects`, `outdoor`, `human_present`,
+`animal_present`, `dynamic_scene`, and `night`. Each is binary and is modeled
+with its own logit. The project deliberately distinguishes three things:
+
+1. Weak-label quality: agreement and Cohen's kappa against 180 human-reviewed
+   examples, each with a 95% bootstrap interval.
+2. Classifier quality: accuracy and calibration against human labels, not
+   merely agreement with its training targets.
+3. The preregistered finding: whether three-source disagreement concentrates
+   in the low-sharpness, low-texture slice, and whether entropy-targeted human
+   correction beats equally sized random correction.
+
+No result numbers are checked into this README. Reports and figures are written
+under `results/` by named scripts, preventing narrative numbers from drifting
+away from primary data. See [PREREGISTRATION.md](PREREGISTRATION.md) before the
+first Stage 3 run.
+
+## Input contract
+
+Use the enriched JSONL written by Video-Curation's BLIP-2 multitask annotation
+stage. Required fields are `image_path` (or supply an extracted middle-frame
+path), `caption`, and a stable video identifier via `source_video_id`,
+`video_id`, `source_path`, or `path`. The adapter preserves `label` as
+`source_category`, plus `blur_score`, `texture_score`, and `split` when present.
+
+Fallback captions such as "a person performing ..." are rejected because they
+leak the source action label and are not BLIP-2 observations. Splits are assigned
+by source video, so frames from the same clip cannot cross train, calibration,
+and test boundaries.
+
+## Quick start
+
+```bash
+python -m venv .venv
+.venv/bin/pip install -e '.[dev,plots]'
+pytest -q
+
+python scripts/prepare_manifest.py data/raw/enriched.jsonl data/processed/manifest.jsonl
+python scripts/run_rule_labeler.py data/processed/manifest.jsonl data/processed/rules.jsonl
+python scripts/make_human_validation.py data/processed/manifest.jsonl data/annotations/human_validation.csv
+```
+
+Complete every task cell in the CSV with `0` or `1`, without consulting weak
+labels. Then measure Stage 1:
+
+```bash
+python scripts/evaluate_weak_labels.py \
+  data/annotations/human_validation.csv data/processed/rules.jsonl \
+  results/stage1_rule_agreement.json
+```
+
+For Stage 2, produce LLM outputs in the same JSONL contract as the rule output,
+and run the image-only labeler:
+
+```bash
+.venv/bin/pip install -e '.[train]'
+python scripts/run_clip_labeler.py data/processed/manifest.jsonl data/processed/clip.jsonl --device cuda
+python scripts/ensemble_labels.py \
+  data/processed/rules.jsonl data/processed/llm.jsonl data/processed/clip.jsonl \
+  data/processed/ensemble.jsonl
+
+python scripts/train_classifier.py \
+  data/processed/manifest.jsonl data/processed/ensemble.jsonl \
+  checkpoints/baseline --device cuda
+```
+
+The LLM interface is provider-neutral: `label_with_llm` accepts a completion
+callable, validates strict structured output, and requires callers to persist
+the provider/model/version. This keeps API choice and credentials outside the
+research logic.
+
+Run the locked Stage 3 hypothesis only after the manifest contains texture
+scores and all three sources are complete:
+
+```bash
+python scripts/run_stage3_hypothesis.py \
+  data/processed/manifest.jsonl data/processed/ensemble.jsonl \
+  results/stage3_preregistered_hypothesis.json
+```
+
+## GPU execution
+
+Training and CLIP labeling can run on the Windows RTX 3070 host. Clone the same
+repository there, install the `train` extra in a virtual environment, copy only
+manifests and referenced frames, and invoke scripts with `--device cuda`.
+Artifacts must record the commit hash, model identifier, seed, configuration,
+and input-manifest SHA-256 before they are accepted into `results/`.
+
+## Honest status
+
+The software and preregistration are implemented. An empirical Stage 1 result
+requires 150-200 completed human judgments. Stage 2 requires explicit LLM and
+CLIP runs, and Stage 3 requires all three label sources plus texture metadata.
+Until those inputs exist, the repository makes no claim that the hypothesis is
+supported or that targeted correction wins.
