@@ -1,0 +1,13 @@
+{
+  "alpha": 0.05,
+  "followup_target_flagged_n": 64,
+  "inflation_rationale": "2x minimum to reduce reliance on an optimistic 10-example pilot effect",
+  "method": "normal approximation, large comparison group",
+  "minimum_flagged_n": 32,
+  "n_trials": 1,
+  "pilot_comparison_n": 4990,
+  "pilot_effect": 0.051220909915530966,
+  "pilot_flagged_n": 10,
+  "pilot_flagged_sd": 0.10203287045049887,
+  "target_power": 0.8
+}

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import json
+import random
 from collections import Counter, defaultdict
 from pathlib import Path
 
@@ -38,11 +39,14 @@ def main():
     parser.add_argument("output")
     parser.add_argument("--seed", type=int, default=2026)
     parser.add_argument("--limit", type=int)
+    parser.add_argument("--coco-split", default="val2017")
+    parser.add_argument("--texture-cut", type=float)
+    parser.add_argument("--target-flagged", type=int)
     args = parser.parse_args()
     root = Path(args.coco_root).resolve()
     annotations = root / "annotations"
-    captions = json.loads((annotations / "captions_val2017.json").read_text())
-    instances = json.loads((annotations / "instances_val2017.json").read_text())
+    captions = json.loads((annotations / f"captions_{args.coco_split}.json").read_text())
+    instances = json.loads((annotations / f"instances_{args.coco_split}.json").read_text())
     by_image = defaultdict(list)
     for annotation in sorted(captions["annotations"], key=lambda row: row["id"]):
         by_image[annotation["image_id"]].append(annotation["caption"])
@@ -51,12 +55,17 @@ def main():
     for annotation in instances["annotations"]:
         categories[annotation["image_id"]].append(category_name[annotation["category_id"]])
     images = sorted(captions["images"], key=lambda row: row["id"])
+    if args.target_flagged:
+        if args.texture_cut is None:
+            raise ValueError("--target-flagged requires --texture-cut")
+        random.Random(args.seed).shuffle(images)
     if args.limit:
         images = images[: args.limit]
     rows = []
+    flagged_count = 0
     for index, image in enumerate(images, 1):
         image_id = str(image["id"])
-        path = (root / "val2017" / image["file_name"]).resolve()
+        path = (root / args.coco_split / image["file_name"]).resolve()
         blur, texture = visual_quality(path)
         counts = Counter(categories[image["id"]])
         dominant = counts.most_common(1)[0][0] if counts else "no_thing_annotation"
@@ -73,6 +82,11 @@ def main():
             "coco_image_id": image["id"],
             "coco_object_counts": dict(sorted(counts.items())),
         })
+        if args.target_flagged and blur < 40 and texture <= args.texture_cut:
+            flagged_count += 1
+        if args.target_flagged and flagged_count >= args.target_flagged:
+            print(f"stopped after {index} images with {flagged_count} flagged", flush=True)
+            break
         if index % 500 == 0:
             print(f"scored {index}/{len(images)}", flush=True)
     rows = assign_group_splits(rows, args.seed)
