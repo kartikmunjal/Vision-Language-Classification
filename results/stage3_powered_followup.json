@@ -1,0 +1,17 @@
+{
+  "bootstrap_replicates": 2000,
+  "preregistration": "PREREGISTRATION_FOLLOWUP.md",
+  "result": {
+    "ci95": [
+      -0.07789315110708478,
+      0.004704818693008205
+    ],
+    "estimate": -0.03549160046643529,
+    "n_comparison": 28615,
+    "n_flagged": 64,
+    "n_trials": 1,
+    "supported": false
+  },
+  "texture_cut": 11.599743604660034,
+  "texture_cut_fitted_on": "provided_frozen_value"
+}
