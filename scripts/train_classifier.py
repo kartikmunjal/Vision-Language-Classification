@@ -33,6 +33,7 @@ def main():
     parser.add_argument("--learning-rate", type=float, default=3e-4)
     parser.add_argument("--seed", type=int, default=2026)
     parser.add_argument("--no-pretrained", action="store_true")
+    parser.add_argument("--inference-only", action="store_true")
     args = parser.parse_args()
 
     import torch
@@ -66,23 +67,31 @@ def main():
     model = (build_resnet18 if args.architecture == "resnet18" else build_vit_tiny)(len(TASKS), not args.no_pretrained).to(args.device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.learning_rate)
     criterion = torch.nn.BCEWithLogitsLoss()
-    model.train()
-    for _ in range(args.epochs):
-        for pixels, targets, _ in loader:
-            optimizer.zero_grad(set_to_none=True)
-            loss = criterion(model(pixels.to(args.device)), targets.to(args.device))
-            loss.backward()
-            optimizer.step()
-
     output = Path(args.output_dir)
     output.mkdir(parents=True, exist_ok=True)
-    torch.save(model.state_dict(), output / "model.pt")
+    if args.inference_only:
+        model.load_state_dict(torch.load(output / "model.pt", map_location=args.device))
+    else:
+        model.train()
+        for _ in range(args.epochs):
+            for pixels, targets, _ in loader:
+                optimizer.zero_grad(set_to_none=True)
+                loss = criterion(model(pixels.to(args.device)), targets.to(args.device))
+                loss.backward()
+                optimizer.step()
+        torch.save(model.state_dict(), output / "model.pt")
     model.eval()
     predictions = []
     with torch.no_grad():
         for pixels, _, ids in DataLoader(Images(eval_rows), batch_size=args.batch_size):
             logits = model(pixels.to(args.device)).cpu().numpy()
-            predictions.extend({"example_id": item_id, "logits": dict(zip(TASKS, row, strict=True))} for item_id, row in zip(ids, logits, strict=True))
+            predictions.extend(
+                {
+                    "example_id": item_id,
+                    "logits": dict(zip(TASKS, (float(value) for value in row), strict=True)),
+                }
+                for item_id, row in zip(ids, logits, strict=True)
+            )
     write_jsonl(predictions, output / "logits.jsonl")
     metadata = {
         "architecture": args.architecture, "pretrained": not args.no_pretrained,

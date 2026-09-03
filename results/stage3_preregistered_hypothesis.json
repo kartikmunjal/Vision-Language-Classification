@@ -1,0 +1,17 @@
+{
+  "bootstrap_replicates": 2000,
+  "preregistration": "PREREGISTRATION.md",
+  "result": {
+    "ci95": [
+      -0.010919715241123914,
+      0.11336690253280571
+    ],
+    "estimate": 0.051220909915530966,
+    "n_comparison": 4990,
+    "n_flagged": 10,
+    "n_trials": 1,
+    "supported": false
+  },
+  "texture_cut": 11.599743604660034,
+  "texture_cut_fitted_on": "train"
+}

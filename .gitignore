@@ -9,6 +9,7 @@ data/cache/
 checkpoints/
 results/*
 !results/.gitkeep
+!results/*.json
 !data/annotations/.gitkeep
 *.pt
 *.pth

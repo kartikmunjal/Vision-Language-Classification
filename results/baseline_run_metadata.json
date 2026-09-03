@@ -1,0 +1,13 @@
+{
+  "architecture": "resnet18",
+  "batch_size": 64,
+  "epochs": 10,
+  "git_commit": "9a52e9c027b4caf61a3dfd7144dbfa91477edaf0",
+  "labels_sha256": "12fac4b314c38802ae676065b5f7dddfe387205025dc097ba3a9e2769e300cc0",
+  "learning_rate": 0.0003,
+  "manifest_sha256": "7b7622549917119ebceeb484363d2d211bd9a33e2b4851c69a0ae08840e6ea89",
+  "n_trials": 1,
+  "pretrained": true,
+  "seed": 2026,
+  "train_examples": 3448
+}

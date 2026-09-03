@@ -61,7 +61,7 @@ def main():
         counts = Counter(categories[image["id"]])
         dominant = counts.most_common(1)[0][0] if counts else "no_thing_annotation"
         rows.append({
-            "example_id": stable_id(image_id, str(path)),
+            "example_id": stable_id(image_id, image["file_name"]),
             "image_path": str(path),
             "caption": by_image[image["id"]][0],
             "all_captions": by_image[image["id"]],

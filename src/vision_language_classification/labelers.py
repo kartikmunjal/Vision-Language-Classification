@@ -13,6 +13,10 @@ def parse_structured_labels(payload: str | dict) -> dict[str, dict]:
         raise ValueError(f"invalid tasks; missing={sorted(missing)}, extra={sorted(extra)}")
     result = {}
     for task, item in data.items():
+        if isinstance(item, int):
+            if item < 0:
+                raise ValueError(f"invalid negative output for {task}")
+            item = {"label": int(item > 0), "confidence": 1.0}
         label = int(item["label"])
         confidence = float(item["confidence"])
         if label not in (0, 1) or not 0 <= confidence <= 1:
@@ -24,9 +28,14 @@ def parse_structured_labels(payload: str | dict) -> dict[str, dict]:
 def llm_prompt(caption: str) -> str:
     tasks = ", ".join(TASKS)
     return (
-        "Infer only what the caption explicitly supports. Return strict JSON with exactly these keys: "
-        f"{tasks}. Each value is {{\"label\": 0 or 1, \"confidence\": 0..1}}. "
-        "Low confidence is required when absence is merely unstated. Caption: " + json.dumps(caption)
+        "Classify a caption into six binary visual attributes. Infer only explicit evidence. "
+        "multiple_subjects=1 only for two or more salient people/animals; outdoor=1 only outdoors; "
+        "human_present=1 for any person; animal_present=1 for any animal; dynamic_scene=1 only for "
+        "visible action or motion; night=1 only when night/darkness is explicit. Unstated means 0. "
+        f"Return only one JSON object with exactly these keys: {tasks}. Each value must be an integer "
+        "0 or 1, with no prose. Example caption: \"A woman stands in a kitchen.\" Example output: "
+        '{"multiple_subjects":0,"outdoor":0,"human_present":1,"animal_present":0,'
+        '"dynamic_scene":0,"night":0}. Caption: ' + json.dumps(caption)
     )
 
 
@@ -55,6 +64,12 @@ class ClipLabeler:
         self.tokenizer = open_clip.get_tokenizer(model_name)
         self.device = device
         self.model_id = f"open_clip:{model_name}:{pretrained}"
+        self._text_features = {}
+        with self.torch.no_grad():
+            for task, (positive, negative) in CLIP_PROMPTS.items():
+                tokens = self.tokenizer([negative, positive]).to(self.device)
+                features = self.model.encode_text(tokens)
+                self._text_features[task] = features / features.norm(dim=-1, keepdim=True)
 
     def label(self, image) -> dict[str, dict]:
         torch = self.torch
@@ -63,10 +78,7 @@ class ClipLabeler:
         with torch.no_grad():
             image_features = self.model.encode_image(x)
             image_features /= image_features.norm(dim=-1, keepdim=True)
-            for task, (positive, negative) in CLIP_PROMPTS.items():
-                tokens = self.tokenizer([negative, positive]).to(self.device)
-                text_features = self.model.encode_text(tokens)
-                text_features /= text_features.norm(dim=-1, keepdim=True)
+            for task, text_features in self._text_features.items():
                 probability = (100 * image_features @ text_features.T).softmax(dim=-1)[0, 1].item()
                 output[task] = {
                     "label": int(probability >= 0.5),
