@@ -46,6 +46,9 @@ python -m venv .venv
 .venv/bin/pip install -e '.[dev,plots]'
 pytest -q
 
+# Standalone fallback when the Video-Curation manifest is unavailable
+python scripts/prepare_coco2017.py data/raw/coco2017 data/processed/manifest.jsonl
+
 python scripts/prepare_manifest.py data/raw/enriched.jsonl data/processed/manifest.jsonl
 python scripts/run_rule_labeler.py data/processed/manifest.jsonl data/processed/rules.jsonl
 python scripts/make_human_validation.py data/processed/manifest.jsonl data/annotations/human_validation.csv
@@ -66,6 +69,7 @@ and run the image-only labeler:
 ```bash
 .venv/bin/pip install -e '.[train]'
 python scripts/run_clip_labeler.py data/processed/manifest.jsonl data/processed/clip.jsonl --device cuda
+python scripts/run_hf_llm_labeler.py data/processed/manifest.jsonl data/processed/llm.jsonl --device cuda
 python scripts/ensemble_labels.py \
   data/processed/rules.jsonl data/processed/llm.jsonl data/processed/clip.jsonl \
   data/processed/ensemble.jsonl
