@@ -103,8 +103,17 @@ and input-manifest SHA-256 before they are accepted into `results/`.
 
 ## Honest status
 
-The software and preregistration are implemented. An empirical Stage 1 result
-requires 150-200 completed human judgments. Stage 2 requires explicit LLM and
-CLIP runs, and Stage 3 requires all three label sources plus texture metadata.
-Until those inputs exist, the repository makes no claim that the hypothesis is
-supported or that targeted correction wins.
+The annotation-free COCO experiment has been run end to end. Generated reports
+under `results/` contain all empirical values and uncertainty intervals. Three
+tasks have independent silver ground truth from COCO's original human instance
+annotations; the remaining three have source-agreement evidence only. A new
+six-task manual review would strengthen the study but is not represented as
+having occurred.
+
+### Annotation-free evaluation
+
+When new manual review is unavailable, `build_coco_silver_labels.py` derives
+independent silver labels from COCO's original human instance annotations for
+human presence, animal presence, and multiple salient people/animals. The
+annotation-free report makes ground-truth claims only for those three tasks.
+Outdoor, dynamic-scene, and night results remain source-agreement diagnostics.

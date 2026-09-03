@@ -6,10 +6,13 @@ __pycache__/
 data/raw/
 data/processed/
 data/cache/
+data/annotations/*.csv
 checkpoints/
+checkpoints_baseline_logits.jsonl
 results/*
 !results/.gitkeep
 !results/*.json
+!results/*.png
 !data/annotations/.gitkeep
 *.pt
 *.pth
