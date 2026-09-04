@@ -117,3 +117,25 @@ independent silver labels from COCO's original human instance annotations for
 human presence, animal presence, and multiple salient people/animals. The
 annotation-free report makes ground-truth claims only for those three tasks.
 Outdoor, dynamic-scene, and night results remain source-agreement diagnostics.
+
+## Six-sequence multimodal extension
+
+The prospectively locked [research sequence](RESEARCH_SEQUENCE_PLAN.md) has now
+been executed across six connected studies: a cross-modal evidence schema, a
+human-preference reward model, controlled temporal evaluation, active
+correction with actual downstream retraining, hard-negative retrieval, and a
+multimodal robustness audit. The generated [full report](results/research_sequence/REPORT.md)
+contains outcomes and confidence intervals. The hard-negative experiment is a
+reported failure, not a tuned-away result. Regenerate every table with:
+
+```bash
+python scripts/run_sequences_1_2.py --abc-root ../ --output-dir results/research_sequence
+python scripts/extract_research_embeddings.py \
+  --manifest data/processed/manifest.jsonl \
+  --image-root data/raw/coco2017/val2017 \
+  --output data/processed/research_embeddings.npz --device cuda
+python scripts/analyze_sequences_3_6.py \
+  --embeddings data/processed/research_embeddings.npz \
+  --processed-dir data/processed --output-dir results/research_sequence
+python scripts/render_research_sequence.py
+```
