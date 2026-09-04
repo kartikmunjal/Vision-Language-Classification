@@ -139,3 +139,23 @@ python scripts/analyze_sequences_3_6.py \
   --processed-dir data/processed --output-dir results/research_sequence
 python scripts/render_research_sequence.py
 ```
+
+## Natural-video follow-up
+
+The additive [follow-up plan](FOLLOWUP_RESEARCH_PLAN.md) fixes an official
+UCF101 split-1 subset, a frozen-CLIP temporal adapter, object-disjoint retrieval
+negatives, multi-objective active acquisition, and official SugarCrepe
+evaluation. Results are generated into `results/followup/`; raw benchmark media
+and frozen embedding caches remain outside Git.
+
+```bash
+# CPU follow-ups over the existing COCO artifacts
+PYTHONPATH=src python scripts/run_coco_followups.py \
+  --embeddings data/processed/research_embeddings.npz \
+  --processed-dir data/processed --output-dir results/followup
+
+# GPU entrypoints (see each --help for registered paths)
+python scripts/run_natural_video_followup.py --help
+python scripts/run_sugarcrepe.py --help
+python scripts/render_followup_report.py
+```

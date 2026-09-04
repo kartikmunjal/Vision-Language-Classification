@@ -17,6 +17,9 @@ results/*
 !results/research_sequence/
 !results/research_sequence/*.json
 !results/research_sequence/*.md
+!results/followup/
+!results/followup/*.json
+!results/followup/*.md
 !data/annotations/.gitkeep
 *.pt
 *.pth
