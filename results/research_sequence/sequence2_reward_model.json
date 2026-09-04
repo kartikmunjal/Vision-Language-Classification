@@ -1,0 +1,1418 @@
+{
+  "schema_version": 1,
+  "plan": "RESEARCH_SEQUENCE_PLAN.md",
+  "git_commit": "a4459d0278211c40f0fa2f3fc054d849a1e92a7f",
+  "python": "3.13.7",
+  "sources": {
+    "audio_downstream": {
+      "path": "/Users/kartikmunjal/Downloads/abc/Audio-Data-Creation/experiments/results/downstream_study/summary.json",
+      "sha256": "cff2036402511cdb84b67377c586015149cdd7d7a8d28ba0bb712c160f85b584"
+    },
+    "audio_crawl": {
+      "path": "/Users/kartikmunjal/Downloads/abc/Audio-Data-Creation/experiments/results/crawl_training_study/summary.json",
+      "sha256": "bc2c3aec6b0a1a8dc05cecd7f833d7fb3cf9c66be56a88dbb94c7595527254c8"
+    },
+    "preferences": {
+      "path": "/Users/kartikmunjal/Downloads/abc/Video-Quality-Reward-Modeling/data/human_preferences/preferences.json",
+      "sha256": "3129bc6fffd4dfe8b4fc2b28a10cf7f28d0af0dcff19ede852dab0e4746c9799"
+    },
+    "vl_eval": {
+      "path": "/Users/kartikmunjal/Downloads/abc/Vision-Language-Classification/results/annotation_free_evaluation.json",
+      "sha256": "f71cff95459849758cf4d6509c6641e74fb34b82b01f3144631dac28534589ea"
+    },
+    "vl_stage3": {
+      "path": "/Users/kartikmunjal/Downloads/abc/Vision-Language-Classification/results/stage3_powered_followup.json",
+      "sha256": "96235fe2bb19b684b52c3fd6179cb39a89a15828e56cccd4292ec88b15401753"
+    }
+  },
+  "sequence": 2,
+  "result": {
+    "n_pairs": 188,
+    "n_trials": 5,
+    "folds": [
+      {
+        "fold": 0,
+        "seed": 11,
+        "n_train": 150,
+        "n_test": 38
+      },
+      {
+        "fold": 1,
+        "seed": 22,
+        "n_train": 150,
+        "n_test": 38
+      },
+      {
+        "fold": 2,
+        "seed": 33,
+        "n_train": 150,
+        "n_test": 38
+      },
+      {
+        "fold": 3,
+        "seed": 44,
+        "n_train": 151,
+        "n_test": 37
+      },
+      {
+        "fold": 4,
+        "seed": 55,
+        "n_train": 151,
+        "n_test": 37
+      }
+    ],
+    "features": [
+      "clip_score",
+      "lpips_temporal",
+      "motion_smoothness",
+      "fvd_score"
+    ],
+    "learned": {
+      "accuracy": 0.973404255319149,
+      "roc_auc": 0.9953409090909091,
+      "brier": 0.027578831738061107
+    },
+    "handcrafted": {
+      "accuracy": 0.9680851063829787,
+      "roc_auc": 0.9961363636363636,
+      "brier": 0.07162491223383227
+    },
+    "paired_deltas_learned_minus_handcrafted": {
+      "accuracy": {
+        "estimate": 0.005319148936170213,
+        "ci95": [
+          -0.010638297872340425,
+          0.02127659574468085
+        ]
+      },
+      "roc_auc": {
+        "estimate": -0.0007954545454544881,
+        "ci95": [
+          -0.003511951965560092,
+          0.0014146712732780785
+        ]
+      },
+      "brier": {
+        "estimate": -0.04404608049577116
+      }
+    },
+    "per_pair_predictions": [
+      {
+        "id": "pair_001",
+        "fold": 4,
+        "target": 1,
+        "learned_probability_a": 0.9969744545486464,
+        "handcrafted_probability_a": 0.8544576710630347
+      },
+      {
+        "id": "pair_002",
+        "fold": 4,
+        "target": 0,
+        "learned_probability_a": 0.004888925569650108,
+        "handcrafted_probability_a": 0.163830361223359
+      },
+      {
+        "id": "pair_004",
+        "fold": 2,
+        "target": 1,
+        "learned_probability_a": 0.918221182070551,
+        "handcrafted_probability_a": 0.6410674063348173
+      },
+      {
+        "id": "pair_005",
+        "fold": 3,
+        "target": 0,
+        "learned_probability_a": 0.37078630964692655,
+        "handcrafted_probability_a": 0.44522076489278517
+      },
+      {
+        "id": "pair_006",
+        "fold": 3,
+        "target": 0,
+        "learned_probability_a": 0.05833576983541327,
+        "handcrafted_probability_a": 0.24232036099629517
+      },
+      {
+        "id": "pair_007",
+        "fold": 2,
+        "target": 1,
+        "learned_probability_a": 0.9634009779113678,
+        "handcrafted_probability_a": 0.7130001627522815
+      },
+      {
+        "id": "pair_008",
+        "fold": 2,
+        "target": 0,
+        "learned_probability_a": 0.007009695037191172,
+        "handcrafted_probability_a": 0.18093879315214198
+      },
+      {
+        "id": "pair_009",
+        "fold": 2,
+        "target": 0,
+        "learned_probability_a": 0.027942105528651017,
+        "handcrafted_probability_a": 0.2091593652130633
+      },
+      {
+        "id": "pair_010",
+        "fold": 1,
+        "target": 0,
+        "learned_probability_a": 0.002824418102745277,
+        "handcrafted_probability_a": 0.13705129257545962
+      },
+      {
+        "id": "pair_012",
+        "fold": 4,
+        "target": 1,
+        "learned_probability_a": 0.9774544472688523,
+        "handcrafted_probability_a": 0.6878313305828403
+      },
+      {
+        "id": "pair_013",
+        "fold": 3,
+        "target": 0,
+        "learned_probability_a": 0.18626150624899881,
+        "handcrafted_probability_a": 0.3589325936651828
+      },
+      {
+        "id": "pair_014",
+        "fold": 1,
+        "target": 1,
+        "learned_probability_a": 0.9987685140547911,
+        "handcrafted_probability_a": 0.8581489350995123
+      },
+      {
+        "id": "pair_015",
+        "fold": 1,
+        "target": 0,
+        "learned_probability_a": 0.07302594008505708,
+        "handcrafted_probability_a": 0.3057636598919696
+      },
+      {
+        "id": "pair_016",
+        "fold": 4,
+        "target": 1,
+        "learned_probability_a": 0.9118722824435249,
+        "handcrafted_probability_a": 0.574442516811659
+      },
+      {
+        "id": "pair_017",
+        "fold": 0,
+        "target": 0,
+        "learned_probability_a": 0.08875991436227794,
+        "handcrafted_probability_a": 0.3186462662109743
+      },
+      {
+        "id": "pair_018",
+        "fold": 1,
+        "target": 0,
+        "learned_probability_a": 0.27065995434478585,
+        "handcrafted_probability_a": 0.4378234991142018
+      },
+      {
+        "id": "pair_019",
+        "fold": 2,
+        "target": 0,
+        "learned_probability_a": 0.03942281824922815,
+        "handcrafted_probability_a": 0.28699983724771816
+      },
+      {
+        "id": "pair_020",
+        "fold": 4,
+        "target": 1,
+        "learned_probability_a": 0.8769606264296049,
+        "handcrafted_probability_a": 0.6748052725823134
+      },
+      {
+        "id": "pair_021",
+        "fold": 1,
+        "target": 1,
+        "learned_probability_a": 0.9870694152664297,
+        "handcrafted_probability_a": 0.7841471891774855
+      },
+      {
+        "id": "pair_022",
+        "fold": 3,
+        "target": 1,
+        "learned_probability_a": 0.9935238557541779,
+        "handcrafted_probability_a": 0.7483817216070642
+      },
+      {
+        "id": "pair_023",
+        "fold": 0,
+        "target": 0,
+        "learned_probability_a": 0.1251057490208641,
+        "handcrafted_probability_a": 0.35434369377420444
+      },
+      {
+        "id": "pair_024",
+        "fold": 2,
+        "target": 1,
+        "learned_probability_a": 0.9525919548450466,
+        "handcrafted_probability_a": 0.742690545302686
+      },
+      {
+        "id": "pair_025",
+        "fold": 2,
+        "target": 0,
+        "learned_probability_a": 0.001689228509482505,
+        "handcrafted_probability_a": 0.14185106490048788
+      },
+      {
+        "id": "pair_027",
+        "fold": 1,
+        "target": 0,
+        "learned_probability_a": 0.005173783770753166,
+        "handcrafted_probability_a": 0.16246506258069618
+      },
+      {
+        "id": "pair_028",
+        "fold": 1,
+        "target": 0,
+        "learned_probability_a": 0.06941220615779467,
+        "handcrafted_probability_a": 0.30364507017616593
+      },
+      {
+        "id": "pair_029",
+        "fold": 2,
+        "target": 0,
+        "learned_probability_a": 0.44575677377319717,
+        "handcrafted_probability_a": 0.502499979166875
+      },
+      {
+        "id": "pair_030",
+        "fold": 3,
+        "target": 1,
+        "learned_probability_a": 0.9986819578000502,
+        "handcrafted_probability_a": 0.8506870654691562
+      },
+      {
+        "id": "pair_031",
+        "fold": 2,
+        "target": 0,
+        "learned_probability_a": 0.05161139605963343,
+        "handcrafted_probability_a": 0.314319886061746
+      },
+      {
+        "id": "pair_032",
+        "fold": 4,
+        "target": 0,
+        "learned_probability_a": 0.012336140861367523,
+        "handcrafted_probability_a": 0.1930986842332164
+      },
+      {
+        "id": "pair_033",
+        "fold": 4,
+        "target": 0,
+        "learned_probability_a": 0.6189902216499148,
+        "handcrafted_probability_a": 0.5124973964842103
+      },
+      {
+        "id": "pair_034",
+        "fold": 4,
+        "target": 0,
+        "learned_probability_a": 0.14018688470358368,
+        "handcrafted_probability_a": 0.35663485430559816
+      },
+      {
+        "id": "pair_035",
+        "fold": 2,
+        "target": 1,
+        "learned_probability_a": 0.9997112483518248,
+        "handcrafted_probability_a": 0.8899274256374969
+      },
+      {
+        "id": "pair_036",
+        "fold": 0,
+        "target": 0,
+        "learned_probability_a": 0.0002708193899515964,
+        "handcrafted_probability_a": 0.07656219735181212
+      },
+      {
+        "id": "pair_037",
+        "fold": 1,
+        "target": 1,
+        "learned_probability_a": 0.9992026380914649,
+        "handcrafted_probability_a": 0.8786811621082631
+      },
+      {
+        "id": "pair_038",
+        "fold": 2,
+        "target": 1,
+        "learned_probability_a": 0.9994503387996911,
+        "handcrafted_probability_a": 0.8993479064358931
+      },
+      {
+        "id": "pair_039",
+        "fold": 1,
+        "target": 0,
+        "learned_probability_a": 0.006034712977730143,
+        "handcrafted_probability_a": 0.13010847436299786
+      },
+      {
+        "id": "pair_040",
+        "fold": 0,
+        "target": 0,
+        "learned_probability_a": 0.00031771861147798173,
+        "handcrafted_probability_a": 0.08017291217281233
+      },
+      {
+        "id": "pair_041",
+        "fold": 4,
+        "target": 0,
+        "learned_probability_a": 0.017176140354723837,
+        "handcrafted_probability_a": 0.23866728515708963
+      },
+      {
+        "id": "pair_042",
+        "fold": 0,
+        "target": 1,
+        "learned_probability_a": 0.9998457203521768,
+        "handcrafted_probability_a": 0.9275735146384823
+      },
+      {
+        "id": "pair_043",
+        "fold": 0,
+        "target": 0,
+        "learned_probability_a": 0.0017370858140437818,
+        "handcrafted_probability_a": 0.1301084743629978
+      },
+      {
+        "id": "pair_044",
+        "fold": 1,
+        "target": 1,
+        "learned_probability_a": 0.9991231600347829,
+        "handcrafted_probability_a": 0.8544576710630347
+      },
+      {
+        "id": "pair_045",
+        "fold": 0,
+        "target": 0,
+        "learned_probability_a": 0.0006057759997008126,
+        "handcrafted_probability_a": 0.07727220213665985
+      },
+      {
+        "id": "pair_046",
+        "fold": 3,
+        "target": 0,
+        "learned_probability_a": 0.0015599740256725038,
+        "handcrafted_probability_a": 0.11304583007207897
+      },
+      {
+        "id": "pair_047",
+        "fold": 0,
+        "target": 1,
+        "learned_probability_a": 0.9989762004314248,
+        "handcrafted_probability_a": 0.9152894342692642
+      },
+      {
+        "id": "pair_048",
+        "fold": 0,
+        "target": 0,
+        "learned_probability_a": 0.0212311157813007,
+        "handcrafted_probability_a": 0.18392172741950424
+      },
+      {
+        "id": "pair_049",
+        "fold": 1,
+        "target": 1,
+        "learned_probability_a": 0.9799221868387917,
+        "handcrafted_probability_a": 0.7502601055951174
+      },
+      {
+        "id": "pair_050",
+        "fold": 3,
+        "target": 0,
+        "learned_probability_a": 0.00016699969484771016,
+        "handcrafted_probability_a": 0.061226162819908024
+      },
+      {
+        "id": "pair_051",
+        "fold": 2,
+        "target": 1,
+        "learned_probability_a": 0.9998041075121269,
+        "handcrafted_probability_a": 0.9387738371800921
+      },
+      {
+        "id": "pair_052",
+        "fold": 3,
+        "target": 1,
+        "learned_probability_a": 0.9943076356050276,
+        "handcrafted_probability_a": 0.8569272765199193
+      },
+      {
+        "id": "pair_053",
+        "fold": 3,
+        "target": 1,
+        "learned_probability_a": 0.9973501328358064,
+        "handcrafted_probability_a": 0.8306161030659813
+      },
+      {
+        "id": "pair_054",
+        "fold": 4,
+        "target": 0,
+        "learned_probability_a": 0.0001121424599687647,
+        "handcrafted_probability_a": 0.05021127319026653
+      },
+      {
+        "id": "pair_055",
+        "fold": 0,
+        "target": 0,
+        "learned_probability_a": 0.00699512087468293,
+        "handcrafted_probability_a": 0.15446526508353475
+      },
+      {
+        "id": "pair_056",
+        "fold": 4,
+        "target": 1,
+        "learned_probability_a": 0.998525274678061,
+        "handcrafted_probability_a": 0.8869541699279211
+      },
+      {
+        "id": "pair_057",
+        "fold": 3,
+        "target": 1,
+        "learned_probability_a": 0.9999675361570587,
+        "handcrafted_probability_a": 0.9512002770012
+      },
+      {
+        "id": "pair_058",
+        "fold": 3,
+        "target": 0,
+        "learned_probability_a": 0.02343980504303547,
+        "handcrafted_probability_a": 0.21248684412253924
+      },
+      {
+        "id": "pair_059",
+        "fold": 4,
+        "target": 1,
+        "learned_probability_a": 0.9911432078045603,
+        "handcrafted_probability_a": 0.7720635494267836
+      },
+      {
+        "id": "pair_060",
+        "fold": 2,
+        "target": 1,
+        "learned_probability_a": 0.9678985509794245,
+        "handcrafted_probability_a": 0.7483817216070642
+      },
+      {
+        "id": "pair_061",
+        "fold": 0,
+        "target": 0,
+        "learned_probability_a": 0.018655513577086637,
+        "handcrafted_probability_a": 0.20751005855963572
+      },
+      {
+        "id": "pair_062",
+        "fold": 3,
+        "target": 0,
+        "learned_probability_a": 0.004101778129972796,
+        "handcrafted_probability_a": 0.1335417225332124
+      },
+      {
+        "id": "pair_063",
+        "fold": 1,
+        "target": 1,
+        "learned_probability_a": 0.9997562847771336,
+        "handcrafted_probability_a": 0.9160615681024419
+      },
+      {
+        "id": "pair_064",
+        "fold": 3,
+        "target": 0,
+        "learned_probability_a": 0.0007746331557876756,
+        "handcrafted_probability_a": 0.0744679451660281
+      },
+      {
+        "id": "pair_065",
+        "fold": 0,
+        "target": 1,
+        "learned_probability_a": 0.9980260226662085,
+        "handcrafted_probability_a": 0.8721384336809187
+      },
+      {
+        "id": "pair_066",
+        "fold": 4,
+        "target": 0,
+        "learned_probability_a": 0.00025753014117655564,
+        "handcrafted_probability_a": 0.07585818002124355
+      },
+      {
+        "id": "pair_067",
+        "fold": 2,
+        "target": 0,
+        "learned_probability_a": 0.0030943382304548473,
+        "handcrafted_probability_a": 0.13238887354206538
+      },
+      {
+        "id": "pair_068",
+        "fold": 4,
+        "target": 0,
+        "learned_probability_a": 0.0013639051399966845,
+        "handcrafted_probability_a": 0.11304583007207901
+      },
+      {
+        "id": "pair_069",
+        "fold": 1,
+        "target": 0,
+        "learned_probability_a": 0.03431273076630454,
+        "handcrafted_probability_a": 0.18392172741950424
+      },
+      {
+        "id": "pair_070",
+        "fold": 0,
+        "target": 0,
+        "learned_probability_a": 0.001939258747514915,
+        "handcrafted_probability_a": 0.12675058012214072
+      },
+      {
+        "id": "pair_071",
+        "fold": 4,
+        "target": 0,
+        "learned_probability_a": 0.0009166938224553518,
+        "handcrafted_probability_a": 0.10156092789763668
+      },
+      {
+        "id": "pair_072",
+        "fold": 4,
+        "target": 1,
+        "learned_probability_a": 0.9989736079810596,
+        "handcrafted_probability_a": 0.9020311957024459
+      },
+      {
+        "id": "pair_074",
+        "fold": 2,
+        "target": 1,
+        "learned_probability_a": 0.9999434943410271,
+        "handcrafted_probability_a": 0.9468488636019362
+      },
+      {
+        "id": "pair_075",
+        "fold": 3,
+        "target": 1,
+        "learned_probability_a": 0.9979152168348907,
+        "handcrafted_probability_a": 0.8797431375322491
+      },
+      {
+        "id": "pair_076",
+        "fold": 3,
+        "target": 1,
+        "learned_probability_a": 0.9968511109291075,
+        "handcrafted_probability_a": 0.8005922431513314
+      },
+      {
+        "id": "pair_077",
+        "fold": 2,
+        "target": 0,
+        "learned_probability_a": 0.003503128277861864,
+        "handcrafted_probability_a": 0.162465062580696
+      },
+      {
+        "id": "pair_078",
+        "fold": 2,
+        "target": 0,
+        "learned_probability_a": 0.0004697576943062689,
+        "handcrafted_probability_a": 0.08866866325473328
+      },
+      {
+        "id": "pair_079",
+        "fold": 2,
+        "target": 1,
+        "learned_probability_a": 0.9988060403703959,
+        "handcrafted_probability_a": 0.8839110779310052
+      },
+      {
+        "id": "pair_080",
+        "fold": 1,
+        "target": 1,
+        "learned_probability_a": 0.9996358510771884,
+        "handcrafted_probability_a": 0.9175866818720871
+      },
+      {
+        "id": "pair_081",
+        "fold": 1,
+        "target": 1,
+        "learned_probability_a": 0.9993929889038504,
+        "handcrafted_probability_a": 0.8797431375322493
+      },
+      {
+        "id": "pair_082",
+        "fold": 4,
+        "target": 1,
+        "learned_probability_a": 0.6510272043252976,
+        "handcrafted_probability_a": 0.5224848247917999
+      },
+      {
+        "id": "pair_083",
+        "fold": 3,
+        "target": 0,
+        "learned_probability_a": 0.026542737175558013,
+        "handcrafted_probability_a": 0.1854274192929824
+      },
+      {
+        "id": "pair_084",
+        "fold": 1,
+        "target": 0,
+        "learned_probability_a": 0.006988806903276888,
+        "handcrafted_probability_a": 0.14185106490048782
+      },
+      {
+        "id": "pair_085",
+        "fold": 1,
+        "target": 0,
+        "learned_probability_a": 0.013340145159069053,
+        "handcrafted_probability_a": 0.1665886135754596
+      },
+      {
+        "id": "pair_086",
+        "fold": 4,
+        "target": 1,
+        "learned_probability_a": 0.9946276971285064,
+        "handcrafted_probability_a": 0.8220063142137535
+      },
+      {
+        "id": "pair_087",
+        "fold": 0,
+        "target": 1,
+        "learned_probability_a": 0.9998891920560519,
+        "handcrafted_probability_a": 0.9393460966843479
+      },
+      {
+        "id": "pair_088",
+        "fold": 1,
+        "target": 1,
+        "learned_probability_a": 0.9991214776719411,
+        "handcrafted_probability_a": 0.8956687768809987
+      },
+      {
+        "id": "pair_089",
+        "fold": 2,
+        "target": 1,
+        "learned_probability_a": 0.9987617696442443,
+        "handcrafted_probability_a": 0.8721384336809187
+      },
+      {
+        "id": "pair_090",
+        "fold": 4,
+        "target": 0,
+        "learned_probability_a": 0.0006051332464349666,
+        "handcrafted_probability_a": 0.13238887354206533
+      },
+      {
+        "id": "pair_091",
+        "fold": 1,
+        "target": 1,
+        "learned_probability_a": 0.9929576151493845,
+        "handcrafted_probability_a": 0.7772998611746911
+      },
+      {
+        "id": "pair_092",
+        "fold": 3,
+        "target": 0,
+        "learned_probability_a": 0.002976284621134406,
+        "handcrafted_probability_a": 0.14307272348008077
+      },
+      {
+        "id": "pair_093",
+        "fold": 0,
+        "target": 0,
+        "learned_probability_a": 0.004690942287404523,
+        "handcrafted_probability_a": 0.16798161486607557
+      },
+      {
+        "id": "pair_094",
+        "fold": 2,
+        "target": 0,
+        "learned_probability_a": 0.004906164102010552,
+        "handcrafted_probability_a": 0.1693838969340188
+      },
+      {
+        "id": "pair_095",
+        "fold": 2,
+        "target": 1,
+        "learned_probability_a": 0.9995419963204976,
+        "handcrafted_probability_a": 0.8909031788043871
+      },
+      {
+        "id": "pair_096",
+        "fold": 0,
+        "target": 1,
+        "learned_probability_a": 0.9309037783169873,
+        "handcrafted_probability_a": 0.6791786991753931
+      },
+      {
+        "id": "pair_097",
+        "fold": 1,
+        "target": 0,
+        "learned_probability_a": 0.0023386400726524404,
+        "handcrafted_probability_a": 0.10909682119561288
+      },
+      {
+        "id": "pair_098",
+        "fold": 1,
+        "target": 1,
+        "learned_probability_a": 0.9929160889064399,
+        "handcrafted_probability_a": 0.8234647252208833
+      },
+      {
+        "id": "pair_099",
+        "fold": 2,
+        "target": 1,
+        "learned_probability_a": 0.997056891563054,
+        "handcrafted_probability_a": 0.8375349374193038
+      },
+      {
+        "id": "pair_100",
+        "fold": 3,
+        "target": 1,
+        "learned_probability_a": 0.9959009796594659,
+        "handcrafted_probability_a": 0.8581489350995121
+      },
+      {
+        "id": "pair_101",
+        "fold": 2,
+        "target": 1,
+        "learned_probability_a": 0.9999728646732903,
+        "handcrafted_probability_a": 0.9547825265167125
+      },
+      {
+        "id": "pair_102",
+        "fold": 4,
+        "target": 1,
+        "learned_probability_a": 0.4132705706287639,
+        "handcrafted_probability_a": 0.5049998333399998
+      },
+      {
+        "id": "pair_103",
+        "fold": 4,
+        "target": 0,
+        "learned_probability_a": 0.00125473102164682,
+        "handcrafted_probability_a": 0.12025686246775086
+      },
+      {
+        "id": "pair_104",
+        "fold": 4,
+        "target": 1,
+        "learned_probability_a": 0.9940829483993051,
+        "handcrafted_probability_a": 0.8175744761936437
+      },
+      {
+        "id": "pair_105",
+        "fold": 2,
+        "target": 0,
+        "learned_probability_a": 0.021209720212691456,
+        "handcrafted_probability_a": 0.2650274005334811
+      },
+      {
+        "id": "pair_106",
+        "fold": 0,
+        "target": 0,
+        "learned_probability_a": 0.005097817993151821,
+        "handcrafted_probability_a": 0.18093879315214192
+      },
+      {
+        "id": "pair_107",
+        "fold": 1,
+        "target": 1,
+        "learned_probability_a": 0.9706365126109191,
+        "handcrafted_probability_a": 0.7858349830425585
+      },
+      {
+        "id": "pair_108",
+        "fold": 2,
+        "target": 0,
+        "learned_probability_a": 0.130522335153621,
+        "handcrafted_probability_a": 0.3566348543055984
+      },
+      {
+        "id": "pair_109",
+        "fold": 1,
+        "target": 0,
+        "learned_probability_a": 0.07903290342831783,
+        "handcrafted_probability_a": 0.2768781948756102
+      },
+      {
+        "id": "pair_110",
+        "fold": 0,
+        "target": 0,
+        "learned_probability_a": 0.018105642658921672,
+        "handcrafted_probability_a": 0.2350521962362353
+      },
+      {
+        "id": "pair_111",
+        "fold": 4,
+        "target": 1,
+        "learned_probability_a": 0.995255017810299,
+        "handcrafted_probability_a": 0.8145725807070178
+      },
+      {
+        "id": "pair_112",
+        "fold": 0,
+        "target": 1,
+        "learned_probability_a": 0.9988642842570303,
+        "handcrafted_probability_a": 0.8556968659094812
+      },
+      {
+        "id": "pair_113",
+        "fold": 0,
+        "target": 1,
+        "learned_probability_a": 0.9290055803307757,
+        "handcrafted_probability_a": 0.7271082163411294
+      },
+      {
+        "id": "pair_114",
+        "fold": 1,
+        "target": 1,
+        "learned_probability_a": 0.7862958553011326,
+        "handcrafted_probability_a": 0.6106392339492221
+      },
+      {
+        "id": "pair_115",
+        "fold": 0,
+        "target": 1,
+        "learned_probability_a": 0.9870873752949375,
+        "handcrafted_probability_a": 0.7667410642285428
+      },
+      {
+        "id": "pair_116",
+        "fold": 3,
+        "target": 0,
+        "learned_probability_a": 0.009280147460472336,
+        "handcrafted_probability_a": 0.16383036122335892
+      },
+      {
+        "id": "pair_117",
+        "fold": 0,
+        "target": 1,
+        "learned_probability_a": 0.9941655263895438,
+        "handcrafted_probability_a": 0.8005922431513316
+      },
+      {
+        "id": "pair_118",
+        "fold": 0,
+        "target": 1,
+        "learned_probability_a": 0.9072746885479833,
+        "handcrafted_probability_a": 0.6034832498647262
+      },
+      {
+        "id": "pair_119",
+        "fold": 1,
+        "target": 0,
+        "learned_probability_a": 0.011011117048779766,
+        "handcrafted_probability_a": 0.16383036122335892
+      },
+      {
+        "id": "pair_120",
+        "fold": 3,
+        "target": 1,
+        "learned_probability_a": 0.9985495110074689,
+        "handcrafted_probability_a": 0.8347951298093854
+      },
+      {
+        "id": "pair_121",
+        "fold": 2,
+        "target": 1,
+        "learned_probability_a": 0.9390588036283858,
+        "handcrafted_probability_a": 0.7271082163411295
+      },
+      {
+        "id": "pair_122",
+        "fold": 3,
+        "target": 1,
+        "learned_probability_a": 0.9823354942875181,
+        "handcrafted_probability_a": 0.7649478037637647
+      },
+      {
+        "id": "pair_123",
+        "fold": 3,
+        "target": 1,
+        "learned_probability_a": 0.9810943461184809,
+        "handcrafted_probability_a": 0.7755640142690733
+      },
+      {
+        "id": "pair_124",
+        "fold": 4,
+        "target": 1,
+        "learned_probability_a": 0.9987427474270271,
+        "handcrafted_probability_a": 0.8721384336809186
+      },
+      {
+        "id": "pair_125",
+        "fold": 0,
+        "target": 0,
+        "learned_probability_a": 0.12533992777064926,
+        "handcrafted_probability_a": 0.30576365989196946
+      },
+      {
+        "id": "pair_126",
+        "fold": 4,
+        "target": 0,
+        "learned_probability_a": 0.03149087889241738,
+        "handcrafted_probability_a": 0.24973989440488228
+      },
+      {
+        "id": "pair_127",
+        "fold": 3,
+        "target": 1,
+        "learned_probability_a": 0.9998340938993885,
+        "handcrafted_probability_a": 0.935836123594826
+      },
+      {
+        "id": "pair_128",
+        "fold": 3,
+        "target": 1,
+        "learned_probability_a": 0.9871600693314299,
+        "handcrafted_probability_a": 0.8292045179776254
+      },
+      {
+        "id": "pair_129",
+        "fold": 4,
+        "target": 1,
+        "learned_probability_a": 0.9988290706886886,
+        "handcrafted_probability_a": 0.8442241598762525
+      },
+      {
+        "id": "pair_130",
+        "fold": 2,
+        "target": 1,
+        "learned_probability_a": 0.9406619471219064,
+        "handcrafted_probability_a": 0.6341355910108007
+      },
+      {
+        "id": "pair_131",
+        "fold": 0,
+        "target": 1,
+        "learned_probability_a": 0.9674995640907671,
+        "handcrafted_probability_a": 0.7150421057009898
+      },
+      {
+        "id": "pair_132",
+        "fold": 3,
+        "target": 1,
+        "learned_probability_a": 0.9929369029777286,
+        "handcrafted_probability_a": 0.7649478037637648
+      },
+      {
+        "id": "pair_133",
+        "fold": 1,
+        "target": 0,
+        "learned_probability_a": 0.0019664401918377586,
+        "handcrafted_probability_a": 0.1160889220689949
+      },
+      {
+        "id": "pair_134",
+        "fold": 3,
+        "target": 1,
+        "learned_probability_a": 0.992582274736989,
+        "handcrafted_probability_a": 0.8175744761936437
+      },
+      {
+        "id": "pair_135",
+        "fold": 0,
+        "target": 0,
+        "learned_probability_a": 0.06868251653606622,
+        "handcrafted_probability_a": 0.27091207765069353
+      },
+      {
+        "id": "pair_136",
+        "fold": 4,
+        "target": 1,
+        "learned_probability_a": 0.9253123497694952,
+        "handcrafted_probability_a": 0.7211151780228631
+      },
+      {
+        "id": "pair_137",
+        "fold": 2,
+        "target": 1,
+        "learned_probability_a": 0.618263508901001,
+        "handcrafted_probability_a": 0.5124973964842103
+      },
+      {
+        "id": "pair_138",
+        "fold": 4,
+        "target": 1,
+        "learned_probability_a": 0.8858567564737754,
+        "handcrafted_probability_a": 0.6271477663131957
+      },
+      {
+        "id": "pair_139",
+        "fold": 1,
+        "target": 1,
+        "learned_probability_a": 0.8189450014169916,
+        "handcrafted_probability_a": 0.5841905229354074
+      },
+      {
+        "id": "pair_140",
+        "fold": 0,
+        "target": 0,
+        "learned_probability_a": 0.42265789218962563,
+        "handcrafted_probability_a": 0.4700359482354282
+      },
+      {
+        "id": "pair_141",
+        "fold": 4,
+        "target": 0,
+        "learned_probability_a": 0.01888615108671122,
+        "handcrafted_probability_a": 0.1930986842332164
+      },
+      {
+        "id": "pair_142",
+        "fold": 4,
+        "target": 1,
+        "learned_probability_a": 0.17681262558123959,
+        "handcrafted_probability_a": 0.39891212115163044
+      },
+      {
+        "id": "pair_143",
+        "fold": 3,
+        "target": 0,
+        "learned_probability_a": 0.2803133494365374,
+        "handcrafted_probability_a": 0.34978145142617284
+      },
+      {
+        "id": "pair_144",
+        "fold": 2,
+        "target": 0,
+        "learned_probability_a": 0.01934183948887222,
+        "handcrafted_probability_a": 0.25540308417252405
+      },
+      {
+        "id": "pair_145",
+        "fold": 3,
+        "target": 1,
+        "learned_probability_a": 0.965504655733754,
+        "handcrafted_probability_a": 0.6878313305828405
+      },
+      {
+        "id": "pair_146",
+        "fold": 3,
+        "target": 0,
+        "learned_probability_a": 0.22221832156011767,
+        "handcrafted_probability_a": 0.36818758226389825
+      },
+      {
+        "id": "pair_147",
+        "fold": 2,
+        "target": 1,
+        "learned_probability_a": 0.9368471922211812,
+        "handcrafted_probability_a": 0.650218548573827
+      },
+      {
+        "id": "pair_148",
+        "fold": 2,
+        "target": 1,
+        "learned_probability_a": 0.9997258628400063,
+        "handcrafted_probability_a": 0.9137258055040833
+      },
+      {
+        "id": "pair_149",
+        "fold": 2,
+        "target": 1,
+        "learned_probability_a": 0.9262918748186905,
+        "handcrafted_probability_a": 0.6899744811276124
+      },
+      {
+        "id": "pair_150",
+        "fold": 1,
+        "target": 1,
+        "learned_probability_a": 0.9689761709453192,
+        "handcrafted_probability_a": 0.7576796390037049
+      },
+      {
+        "id": "pair_151",
+        "fold": 1,
+        "target": 1,
+        "learned_probability_a": 0.9933218147345071,
+        "handcrafted_probability_a": 0.7720635494267837
+      },
+      {
+        "id": "pair_152",
+        "fold": 4,
+        "target": 0,
+        "learned_probability_a": 0.020240573339147486,
+        "handcrafted_probability_a": 0.2849578942990103
+      },
+      {
+        "id": "pair_153",
+        "fold": 3,
+        "target": 1,
+        "learned_probability_a": 0.9774922902527334,
+        "handcrafted_probability_a": 0.7576796390037049
+      },
+      {
+        "id": "pair_154",
+        "fold": 1,
+        "target": 1,
+        "learned_probability_a": 0.9984406542125026,
+        "handcrafted_probability_a": 0.8899274256374969
+      },
+      {
+        "id": "pair_155",
+        "fold": 1,
+        "target": 0,
+        "learned_probability_a": 0.21374157604719612,
+        "handcrafted_probability_a": 0.4133824210826698
+      },
+      {
+        "id": "pair_157",
+        "fold": 0,
+        "target": 0,
+        "learned_probability_a": 0.02005730089590721,
+        "handcrafted_probability_a": 0.2332589357714573
+      },
+      {
+        "id": "pair_158",
+        "fold": 1,
+        "target": 0,
+        "learned_probability_a": 0.435110532217522,
+        "handcrafted_probability_a": 0.4900013331200346
+      },
+      {
+        "id": "pair_160",
+        "fold": 4,
+        "target": 1,
+        "learned_probability_a": 0.6353712238491648,
+        "handcrafted_probability_a": 0.569546223939229
+      },
+      {
+        "id": "pair_161",
+        "fold": 1,
+        "target": 0,
+        "learned_probability_a": 0.01336062150647309,
+        "handcrafted_probability_a": 0.20751005855963559
+      },
+      {
+        "id": "pair_162",
+        "fold": 3,
+        "target": 1,
+        "learned_probability_a": 0.8732255040827056,
+        "handcrafted_probability_a": 0.650218548573827
+      },
+      {
+        "id": "pair_163",
+        "fold": 0,
+        "target": 1,
+        "learned_probability_a": 0.9752508323126824,
+        "handcrafted_probability_a": 0.7649478037637647
+      },
+      {
+        "id": "pair_164",
+        "fold": 2,
+        "target": 1,
+        "learned_probability_a": 0.982199590345384,
+        "handcrafted_probability_a": 0.7483817216070641
+      },
+      {
+        "id": "pair_165",
+        "fold": 2,
+        "target": 1,
+        "learned_probability_a": 0.9881225489609881,
+        "handcrafted_probability_a": 0.787513155877461
+      },
+      {
+        "id": "pair_166",
+        "fold": 0,
+        "target": 1,
+        "learned_probability_a": 0.9987171000760747,
+        "handcrafted_probability_a": 0.8797431375322493
+      },
+      {
+        "id": "pair_167",
+        "fold": 1,
+        "target": 1,
+        "learned_probability_a": 0.9239292253436799,
+        "handcrafted_probability_a": 0.6592603884513852
+      },
+      {
+        "id": "pair_168",
+        "fold": 1,
+        "target": 1,
+        "learned_probability_a": 0.9235186777419662,
+        "handcrafted_probability_a": 0.6547534606063193
+      },
+      {
+        "id": "pair_170",
+        "fold": 3,
+        "target": 1,
+        "learned_probability_a": 0.9728356486750541,
+        "handcrafted_probability_a": 0.7130001627522817
+      },
+      {
+        "id": "pair_173",
+        "fold": 4,
+        "target": 0,
+        "learned_probability_a": 0.16411402495954575,
+        "handcrafted_probability_a": 0.3318122278318339
+      },
+      {
+        "id": "pair_174",
+        "fold": 4,
+        "target": 1,
+        "learned_probability_a": 0.8734452702959596,
+        "handcrafted_probability_a": 0.6058736684317605
+      },
+      {
+        "id": "pair_175",
+        "fold": 2,
+        "target": 0,
+        "learned_probability_a": 0.05209616248781217,
+        "handcrafted_probability_a": 0.3186462662109744
+      },
+      {
+        "id": "pair_176",
+        "fold": 0,
+        "target": 0,
+        "learned_probability_a": 0.27073350624336495,
+        "handcrafted_probability_a": 0.44275214540144436
+      },
+      {
+        "id": "pair_177",
+        "fold": 1,
+        "target": 1,
+        "learned_probability_a": 0.6975621076321961,
+        "handcrafted_probability_a": 0.5572478545985556
+      },
+      {
+        "id": "pair_178",
+        "fold": 2,
+        "target": 0,
+        "learned_probability_a": 0.009163269202230968,
+        "handcrafted_probability_a": 0.2192572520878716
+      },
+      {
+        "id": "pair_180",
+        "fold": 0,
+        "target": 1,
+        "learned_probability_a": 0.5828737425671487,
+        "handcrafted_probability_a": 0.5
+      },
+      {
+        "id": "pair_181",
+        "fold": 4,
+        "target": 0,
+        "learned_probability_a": 0.07988990187462529,
+        "handcrafted_probability_a": 0.35434369377420444
+      },
+      {
+        "id": "pair_182",
+        "fold": 0,
+        "target": 1,
+        "learned_probability_a": 0.6493565669614288,
+        "handcrafted_probability_a": 0.4900013331200346
+      },
+      {
+        "id": "pair_183",
+        "fold": 0,
+        "target": 1,
+        "learned_probability_a": 0.7466385783837615,
+        "handcrafted_probability_a": 0.6456563062257954
+      },
+      {
+        "id": "pair_184",
+        "fold": 1,
+        "target": 0,
+        "learned_probability_a": 0.09818474158984694,
+        "handcrafted_probability_a": 0.33849684079704756
+      },
+      {
+        "id": "pair_185",
+        "fold": 0,
+        "target": 0,
+        "learned_probability_a": 0.27347440972116893,
+        "handcrafted_probability_a": 0.43045377606077095
+      },
+      {
+        "id": "pair_186",
+        "fold": 3,
+        "target": 0,
+        "learned_probability_a": 0.17008856846088186,
+        "handcrafted_probability_a": 0.3078904956982118
+      },
+      {
+        "id": "pair_187",
+        "fold": 0,
+        "target": 0,
+        "learned_probability_a": 0.013871694982596978,
+        "handcrafted_probability_a": 0.22443598573092644
+      },
+      {
+        "id": "pair_188",
+        "fold": 0,
+        "target": 0,
+        "learned_probability_a": 0.4526330711283495,
+        "handcrafted_probability_a": 0.44522076489278534
+      },
+      {
+        "id": "pair_189",
+        "fold": 1,
+        "target": 0,
+        "learned_probability_a": 0.011045191762032003,
+        "handcrafted_probability_a": 0.17221639173387782
+      },
+      {
+        "id": "pair_191",
+        "fold": 2,
+        "target": 0,
+        "learned_probability_a": 0.03124157277596791,
+        "handcrafted_probability_a": 0.2788848219771369
+      },
+      {
+        "id": "pair_192",
+        "fold": 3,
+        "target": 0,
+        "learned_probability_a": 0.038480133591025104,
+        "handcrafted_probability_a": 0.24973989440488228
+      },
+      {
+        "id": "pair_193",
+        "fold": 3,
+        "target": 1,
+        "learned_probability_a": 0.9751085848689088,
+        "handcrafted_probability_a": 0.7685247834990175
+      },
+      {
+        "id": "pair_194",
+        "fold": 4,
+        "target": 0,
+        "learned_probability_a": 0.029748572761245755,
+        "handcrafted_probability_a": 0.24416110090520296
+      },
+      {
+        "id": "pair_195",
+        "fold": 0,
+        "target": 1,
+        "learned_probability_a": 0.7526287253121469,
+        "handcrafted_probability_a": 0.6201064323430902
+      },
+      {
+        "id": "pair_197",
+        "fold": 3,
+        "target": 0,
+        "learned_probability_a": 0.5942777999857626,
+        "handcrafted_probability_a": 0.5324543063873188
+      },
+      {
+        "id": "pair_198",
+        "fold": 3,
+        "target": 1,
+        "learned_probability_a": 0.9950472899094673,
+        "handcrafted_probability_a": 0.7941296281990525
+      },
+      {
+        "id": "pair_199",
+        "fold": 4,
+        "target": 1,
+        "learned_probability_a": 0.9321193397920765,
+        "handcrafted_probability_a": 0.744596915827476
+      },
+      {
+        "id": "pair_200",
+        "fold": 2,
+        "target": 1,
+        "learned_probability_a": 0.1296255981422917,
+        "handcrafted_probability_a": 0.36354745971843366
+      }
+    ]
+  }
+}

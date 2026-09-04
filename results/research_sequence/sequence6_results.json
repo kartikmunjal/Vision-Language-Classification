@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "plan": "RESEARCH_SEQUENCE_PLAN.md",
+  "git_commit": "a4459d0278211c40f0fa2f3fc054d849a1e92a7f",
+  "embedding_sha256": "935a87bdb04467940eb6735fd002acd5f483a30d7871ecfae1854cc5ea80cbc3",
+  "embedding_metadata": {
+    "model_id": "open_clip:ViT-B-32:laion2b_s34b_b79k",
+    "torch_version": "2.11.0+cu128",
+    "device": "cuda",
+    "cuda_device": "NVIDIA GeForce RTX 3070",
+    "manifest_sha256": "7b7622549917119ebceeb484363d2d211bd9a33e2b4851c69a0ae08840e6ea89",
+    "temporal_n": 300,
+    "seed": 20260903
+  },
+  "python": "3.13.7",
+  "bootstrap_replicates": 10000,
+  "seeds": [
+    11,
+    22,
+    33,
+    44,
+    55
+  ],
+  "sequence": 6,
+  "result": {
+    "retrieval": {
+      "static": {
+        "frame7": {
+          "recall_at_1": 0.75,
+          "recall_at_5": 0.94,
+          "median_rank": 1.0
+        },
+        "flip_rate_from_frame0": 0.0
+      },
+      "translation": {
+        "frame7": {
+          "recall_at_1": 0.7333333333333333,
+          "recall_at_5": 0.92,
+          "median_rank": 1.0
+        },
+        "flip_rate_from_frame0": 0.11666666666666667
+      },
+      "blur": {
+        "frame7": {
+          "recall_at_1": 0.6866666666666666,
+          "recall_at_5": 0.91,
+          "median_rank": 1.0
+        },
+        "flip_rate_from_frame0": 0.20333333333333334
+      },
+      "darkening": {
+        "frame7": {
+          "recall_at_1": 0.6933333333333334,
+          "recall_at_5": 0.9333333333333333,
+          "median_rank": 1.0
+        },
+        "flip_rate_from_frame0": 0.17333333333333334
+      },
+      "occlusion": {
+        "frame7": {
+          "recall_at_1": 0.48333333333333334,
+          "recall_at_5": 0.8066666666666666,
+          "median_rank": 2.0
+        },
+        "flip_rate_from_frame0": 0.4666666666666667
+      }
+    },
+    "caption_attacks": {
+      "negation_preferred_over_original_rate": 0.7433333333333333,
+      "count_swap_preferred_over_original_rate": 0.41333333333333333,
+      "n": 300
+    },
+    "classifier": {
+      "human_present": {
+        "clean_accuracy": 0.91,
+        "corruptions": {
+          "translation": {
+            "accuracy": 0.9233333333333333,
+            "accuracy_delta_from_clean": 0.013333333333333308,
+            "prediction_flip_rate": 0.03333333333333333,
+            "mean_confidence_shift": -0.004040501546114683
+          },
+          "blur": {
+            "accuracy": 0.9,
+            "accuracy_delta_from_clean": -0.010000000000000009,
+            "prediction_flip_rate": 0.05,
+            "mean_confidence_shift": -0.013467777520418167
+          },
+          "darkening": {
+            "accuracy": 0.9066666666666666,
+            "accuracy_delta_from_clean": -0.0033333333333334103,
+            "prediction_flip_rate": 0.023333333333333334,
+            "mean_confidence_shift": -0.005258792545646429
+          },
+          "occlusion": {
+            "accuracy": 0.8933333333333333,
+            "accuracy_delta_from_clean": -0.01666666666666672,
+            "prediction_flip_rate": 0.11666666666666667,
+            "mean_confidence_shift": -0.05420471355319023
+          }
+        }
+      },
+      "animal_present": {
+        "clean_accuracy": 0.99,
+        "corruptions": {
+          "translation": {
+            "accuracy": 0.9833333333333333,
+            "accuracy_delta_from_clean": -0.00666666666666671,
+            "prediction_flip_rate": 0.006666666666666667,
+            "mean_confidence_shift": -0.004332746844738722
+          },
+          "blur": {
+            "accuracy": 0.9666666666666667,
+            "accuracy_delta_from_clean": -0.023333333333333317,
+            "prediction_flip_rate": 0.023333333333333334,
+            "mean_confidence_shift": -0.003022882156074047
+          },
+          "darkening": {
+            "accuracy": 0.9933333333333333,
+            "accuracy_delta_from_clean": 0.0033333333333332993,
+            "prediction_flip_rate": 0.0033333333333333335,
+            "mean_confidence_shift": 0.0008757678442634642
+          },
+          "occlusion": {
+            "accuracy": 0.9566666666666667,
+            "accuracy_delta_from_clean": -0.033333333333333326,
+            "prediction_flip_rate": 0.04,
+            "mean_confidence_shift": -0.05051742494106293
+          }
+        }
+      },
+      "multiple_subjects": {
+        "clean_accuracy": 0.86,
+        "corruptions": {
+          "translation": {
+            "accuracy": 0.8866666666666667,
+            "accuracy_delta_from_clean": 0.026666666666666727,
+            "prediction_flip_rate": 0.06666666666666667,
+            "mean_confidence_shift": -0.0010095116449519992
+          },
+          "blur": {
+            "accuracy": 0.8366666666666667,
+            "accuracy_delta_from_clean": -0.023333333333333317,
+            "prediction_flip_rate": 0.11666666666666667,
+            "mean_confidence_shift": 0.0021871495991945267
+          },
+          "darkening": {
+            "accuracy": 0.86,
+            "accuracy_delta_from_clean": 0.0,
+            "prediction_flip_rate": 0.09333333333333334,
+            "mean_confidence_shift": 0.0031303183641284704
+          },
+          "occlusion": {
+            "accuracy": 0.84,
+            "accuracy_delta_from_clean": -0.020000000000000018,
+            "prediction_flip_rate": 0.12666666666666668,
+            "mean_confidence_shift": -0.03518142178654671
+          }
+        }
+      }
+    },
+    "n_trials": 1,
+    "scope": "controlled corruption audit, not safety certification"
+  }
+}

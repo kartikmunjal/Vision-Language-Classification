@@ -1,0 +1,113 @@
+{
+  "schema_version": 1,
+  "plan": "RESEARCH_SEQUENCE_PLAN.md",
+  "git_commit": "a4459d0278211c40f0fa2f3fc054d849a1e92a7f",
+  "python": "3.13.7",
+  "sources": {
+    "audio_downstream": {
+      "path": "/Users/kartikmunjal/Downloads/abc/Audio-Data-Creation/experiments/results/downstream_study/summary.json",
+      "sha256": "cff2036402511cdb84b67377c586015149cdd7d7a8d28ba0bb712c160f85b584"
+    },
+    "audio_crawl": {
+      "path": "/Users/kartikmunjal/Downloads/abc/Audio-Data-Creation/experiments/results/crawl_training_study/summary.json",
+      "sha256": "bc2c3aec6b0a1a8dc05cecd7f833d7fb3cf9c66be56a88dbb94c7595527254c8"
+    },
+    "preferences": {
+      "path": "/Users/kartikmunjal/Downloads/abc/Video-Quality-Reward-Modeling/data/human_preferences/preferences.json",
+      "sha256": "3129bc6fffd4dfe8b4fc2b28a10cf7f28d0af0dcff19ede852dab0e4746c9799"
+    },
+    "vl_eval": {
+      "path": "/Users/kartikmunjal/Downloads/abc/Vision-Language-Classification/results/annotation_free_evaluation.json",
+      "sha256": "f71cff95459849758cf4d6509c6641e74fb34b82b01f3144631dac28534589ea"
+    },
+    "vl_stage3": {
+      "path": "/Users/kartikmunjal/Downloads/abc/Vision-Language-Classification/results/stage3_powered_followup.json",
+      "sha256": "96235fe2bb19b684b52c3fd6179cb39a89a15828e56cccd4292ec88b15401753"
+    }
+  },
+  "sequence": 1,
+  "evidence": [
+    {
+      "modality": "audio",
+      "study": "curation",
+      "metric": "WER delta",
+      "estimate": 0.00015080000000000003,
+      "ci95": [
+        -0.0001508,
+        0.00045240000000000005
+      ],
+      "n_trials": 5,
+      "direction": "lower_is_better"
+    },
+    {
+      "modality": "audio",
+      "study": "crawler augmentation",
+      "metric": "WER delta",
+      "estimate": 0.011680000000000001,
+      "ci95": [
+        0.00878,
+        0.014580000000000004
+      ],
+      "n_trials": 5,
+      "direction": "lower_is_better"
+    },
+    {
+      "modality": "vision-language",
+      "study": "powered low-quality slice",
+      "metric": "disagreement delta",
+      "estimate": -0.03549160046643529,
+      "ci95": [
+        -0.07789315110708478,
+        0.004704818693008205
+      ],
+      "n_trials": 1,
+      "direction": "lower_is_better"
+    },
+    {
+      "modality": "vision-language",
+      "study": "animal_present",
+      "metric": "ensemble accuracy",
+      "estimate": 0.911957950065703,
+      "ci95": [
+        0.8909329829172142,
+        0.9316688567674113
+      ],
+      "n_trials": 1,
+      "direction": "higher_is_better"
+    },
+    {
+      "modality": "vision-language",
+      "study": "human_present",
+      "metric": "ensemble accuracy",
+      "estimate": 0.7884362680683311,
+      "ci95": [
+        0.7608409986859396,
+        0.8160643889618922
+      ],
+      "n_trials": 1,
+      "direction": "higher_is_better"
+    },
+    {
+      "modality": "vision-language",
+      "study": "multiple_subjects",
+      "metric": "ensemble accuracy",
+      "estimate": 0.7332457293035479,
+      "ci95": [
+        0.7003942181340341,
+        0.7660972404730617
+      ],
+      "n_trials": 1,
+      "direction": "higher_is_better"
+    },
+    {
+      "modality": "video",
+      "study": "human preference agreement",
+      "metric": "Cohen kappa",
+      "estimate": 0.71,
+      "ci95": null,
+      "n_trials": 1,
+      "direction": "higher_is_better",
+      "note": "source artifact does not provide CI"
+    }
+  ]
+}
