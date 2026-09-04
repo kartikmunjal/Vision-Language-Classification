@@ -29,7 +29,7 @@ def enc_text(model,tok,texts,device):
         out.append(z.float().cpu().numpy())
     return np.concatenate(out)
 def main():
-    ap=argparse.ArgumentParser();ap.add_argument("--data-root",type=Path,required=True);ap.add_argument("--image-root",type=Path,required=True);ap.add_argument("--output",type=Path,required=True);ap.add_argument("--source-commit",required=True);ap.add_argument("--device",default="cuda");a=ap.parse_args()
+    ap=argparse.ArgumentParser();ap.add_argument("--data-root",type=Path,required=True);ap.add_argument("--image-root",type=Path,required=True);ap.add_argument("--output",type=Path,required=True);ap.add_argument("--source-commit",required=True);ap.add_argument("--implementation-commit");ap.add_argument("--device",default="cuda");a=ap.parse_args()
     model,_,pre=open_clip.create_model_and_transforms("ViT-B-32",pretrained="laion2b_s34b_b79k");model=model.eval().to(a.device);tok=open_clip.get_tokenizer("ViT-B-32")
     result={};all_correct=[];predictions=[]
     for family in FILES:
@@ -42,6 +42,6 @@ def main():
     result["macro_family_accuracy"]={"estimate":float(np.mean([result[x]["accuracy"] for x in FILES])),"n_families":len(FILES)}
     try:commit=subprocess.check_output(["git","rev-parse","HEAD"],text=True,stderr=subprocess.DEVNULL).strip()
     except Exception:commit=None
-    payload={"schema_version":1,"plan":"FOLLOWUP_RESEARCH_PLAN.md","git_commit":commit,"source_repository":"https://github.com/RAIVNLab/sugar-crepe","source_commit":a.source_commit,"model_id":"open_clip:ViT-B-32:laion2b_s34b_b79k","result":result,"predictions":predictions,"n_trials":1,"bootstrap_replicates":10000,"device":torch.cuda.get_device_name(0) if a.device.startswith('cuda') else a.device,"torch":torch.__version__,"python":platform.python_version()}
+    payload={"schema_version":1,"plan":"FOLLOWUP_RESEARCH_PLAN.md","git_commit":a.implementation_commit or commit,"execution_checkout":commit,"source_repository":"https://github.com/RAIVNLab/sugar-crepe","source_commit":a.source_commit,"model_id":"open_clip:ViT-B-32:laion2b_s34b_b79k","result":result,"predictions":predictions,"n_trials":1,"bootstrap_replicates":10000,"device":torch.cuda.get_device_name(0) if a.device.startswith('cuda') else a.device,"torch":torch.__version__,"python":platform.python_version()}
     a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(payload,indent=2)+"\n")
 if __name__=="__main__":main()

@@ -112,7 +112,7 @@ def train_model(cls,frames,y,split,seed,device):
     return out
 
 def main():
-    ap=argparse.ArgumentParser();ap.add_argument("--video-root",type=Path,required=True);ap.add_argument("--split-root",type=Path,required=True);ap.add_argument("--cache",type=Path,required=True);ap.add_argument("--output",type=Path,required=True);ap.add_argument("--archive",type=Path,required=True);ap.add_argument("--split-archive",type=Path,required=True);ap.add_argument("--device",default="cuda");a=ap.parse_args()
+    ap=argparse.ArgumentParser();ap.add_argument("--video-root",type=Path,required=True);ap.add_argument("--split-root",type=Path,required=True);ap.add_argument("--cache",type=Path,required=True);ap.add_argument("--output",type=Path,required=True);ap.add_argument("--archive",type=Path,required=True);ap.add_argument("--split-archive",type=Path,required=True);ap.add_argument("--implementation-commit");ap.add_argument("--device",default="cuda");a=ap.parse_args()
     rows=manifest(a.split_root,a.video_root)
     if a.cache.exists():
         z=np.load(a.cache);frames,y,split,p=z["frames"],z["labels"],z["splits"].astype(str),z["prompts"];good=rows;fail=[]
@@ -131,6 +131,6 @@ def main():
     for r in fail:by[r["split"]][r["class"]]+=1
     try:commit=subprocess.check_output(["git","rev-parse","HEAD"],text=True,stderr=subprocess.DEVNULL).strip()
     except Exception:commit=None
-    result={"schema_version":1,"plan":"FOLLOWUP_RESEARCH_PLAN.md","git_commit":commit,"classes":CLASSES,"conditions":CONDITIONS,"caps":{"train":70,"test":30},"sampled_frames":16,"model_id":"open_clip:ViT-B-32:laion2b_s34b_b79k","archive_sha256":sha(a.archive),"split_archive_sha256":sha(a.split_archive),"n_requested":len(rows),"n_decoded":len(good),"decode_failures":fail,"decode_failures_by_slice":by,"zero_shot":zero,"trials":trials,"paired_deltas_temporal_minus_mean":deltas,"n_trials":5,"seeds":SEEDS,"torch":torch.__version__,"device":torch.cuda.get_device_name(0) if a.device.startswith('cuda') else a.device,"python":platform.python_version()}
+    result={"schema_version":1,"plan":"FOLLOWUP_RESEARCH_PLAN.md","git_commit":a.implementation_commit or commit,"execution_checkout":commit,"classes":CLASSES,"conditions":CONDITIONS,"caps":{"train":70,"test":30},"sampled_frames":16,"model_id":"open_clip:ViT-B-32:laion2b_s34b_b79k","archive_sha256":sha(a.archive),"split_archive_sha256":sha(a.split_archive),"n_requested":len(rows),"n_decoded":len(good),"decode_failures":fail,"decode_failures_by_slice":by,"zero_shot":zero,"trials":trials,"paired_deltas_temporal_minus_mean":deltas,"n_trials":5,"seeds":SEEDS,"torch":torch.__version__,"device":torch.cuda.get_device_name(0) if a.device.startswith('cuda') else a.device,"python":platform.python_version()}
     a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(result,indent=2)+"\n")
 if __name__=="__main__":main()
