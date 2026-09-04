@@ -134,8 +134,9 @@ def main():
         deltas[cond]={"estimate":float(np.mean(d)),"ci95":ci(d),"trial_deltas":d,"n_trials":5}
     by=defaultdict(lambda:defaultdict(int))
     for r in fail:by[r["split"]][r["class"]]+=1
+    public_failures=[{k:v for k,v in r.items() if k!="path"} for r in fail]
     try:commit=subprocess.check_output(["git","rev-parse","HEAD"],text=True,stderr=subprocess.DEVNULL).strip()
     except Exception:commit=None
-    result={"schema_version":1,"plan":"FOLLOWUP_RESEARCH_PLAN.md","git_commit":a.implementation_commit or commit,"execution_checkout":commit,"classes":CLASSES,"conditions":CONDITIONS,"caps":{"train":70,"test":30},"sampled_frames":16,"model_id":"open_clip:ViT-B-32:laion2b_s34b_b79k","archive_sha256":sha(a.archive),"split_archive_sha256":sha(a.split_archive),"n_requested":len(rows),"n_decoded":len(good),"decode_failures":fail,"decode_failures_by_slice":by,"zero_shot":zero,"trials":trials,"paired_deltas_temporal_minus_mean":deltas,"n_trials":5,"seeds":SEEDS,"torch":torch.__version__,"device":torch.cuda.get_device_name(0) if a.device.startswith('cuda') else a.device,"python":platform.python_version()}
+    result={"schema_version":1,"plan":"FOLLOWUP_RESEARCH_PLAN.md","git_commit":a.implementation_commit or commit,"execution_checkout":commit,"classes":CLASSES,"conditions":CONDITIONS,"caps":{"train":70,"test":30},"sampled_frames":16,"model_id":"open_clip:ViT-B-32:laion2b_s34b_b79k","archive_sha256":sha(a.archive),"split_archive_sha256":sha(a.split_archive),"n_requested":len(rows),"n_decoded":len(good),"decode_failures":public_failures,"decode_failures_by_slice":by,"zero_shot":zero,"trials":trials,"paired_deltas_temporal_minus_mean":deltas,"n_trials":5,"seeds":SEEDS,"torch":torch.__version__,"device":torch.cuda.get_device_name(0) if a.device.startswith('cuda') else a.device,"python":platform.python_version()}
     a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(result,indent=2)+"\n")
 if __name__=="__main__":main()
