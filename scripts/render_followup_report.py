@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Render the natural-video/compositional follow-up from result JSON."""
 from pathlib import Path
+import subprocess,sys
 import json
 R=Path(__file__).resolve().parents[1]/"results/followup"
 load=lambda p:json.loads((R/p).read_text())
@@ -25,3 +26,4 @@ lines += ["",f"Macro accuracy across the seven detailed perturbation families: {
 "## Interpretation","","The temporal model is accepted only where its paired seed interval excludes zero. Verified negatives are retained as a methodological failure if their retrieval interval is below zero. Multi-objective acquisition is interpreted separately at each preregistered budget. SugarCrepe measures compositional discrimination, not general safety.","",
 "## Reproducibility","","Raw UCF101 videos and COCO images remain outside Git. Archive hashes, model identifiers, GPU, seeds, trial predictions, decode failures, and per-example SugarCrepe predictions are stored in the JSON artifacts.",""]
 (R/"REPORT.md").write_text("\n".join(lines))
+subprocess.run([sys.executable,str(R.parents[1]/"scripts/update_readme_results.py")],check=True)

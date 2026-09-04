@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Render the six-sequence report exclusively from machine-readable results."""
 from pathlib import Path
+import subprocess,sys
 import json
 
 ROOT=Path(__file__).resolve().parents[1]; D=ROOT/"results/research_sequence"
@@ -34,3 +35,4 @@ lines += ["","Hard-only mining failed decisively. Frozen CLIP neighbors are freq
 "## 6. Robustness audit","",f"At frame 7, occlusion reduced retrieval Recall@1 to {f(s6['retrieval']['occlusion']['frame7']['recall_at_1'])}, with a {f(s6['retrieval']['occlusion']['flip_rate_from_frame0'])} top-result flip rate. A negated caption scored at least as highly as the original on {f(s6['caption_attacks']['negation_preferred_over_original_rate'])} of examples; subject-count swaps did so on {f(s6['caption_attacks']['count_swap_preferred_over_original_rate'])} (n={s6['caption_attacks']['n']}). This is a controlled audit, not a safety certification.","",
 "## Bottom line","","The strongest positive result is that disagreement targeting improves downstream classification after actual retraining, especially for human presence and subject count. The strongest failure result is that naïve hard-negative mining catastrophically damages retrieval. Controlled corruption exposes substantial negation blindness and occlusion sensitivity. Natural-video validation remains the next required external-data step.",""]
 (D/"REPORT.md").write_text("\n".join(lines))
+subprocess.run([sys.executable,str(ROOT/"scripts/update_readme_results.py")],check=True)
