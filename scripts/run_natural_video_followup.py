@@ -115,7 +115,12 @@ def main():
     ap=argparse.ArgumentParser();ap.add_argument("--video-root",type=Path,required=True);ap.add_argument("--split-root",type=Path,required=True);ap.add_argument("--cache",type=Path,required=True);ap.add_argument("--output",type=Path,required=True);ap.add_argument("--archive",type=Path,required=True);ap.add_argument("--split-archive",type=Path,required=True);ap.add_argument("--implementation-commit");ap.add_argument("--device",default="cuda");a=ap.parse_args()
     rows=manifest(a.split_root,a.video_root)
     if a.cache.exists():
-        z=np.load(a.cache);frames,y,split,p=z["frames"],z["labels"],z["splits"].astype(str),z["prompts"];good=rows;fail=[]
+        z=np.load(a.cache);frames,y,split,p=z["frames"],z["labels"],z["splits"].astype(str),z["prompts"]
+        good=[];fail=[]
+        for r in rows:
+            if decode(r["path"]) is None:fail.append(r)
+            else:good.append(r)
+        if len(good)!=len(y):raise RuntimeError("cache row count does not match revalidated decode ledger")
     else:good,fail,frames,y,split,p=extract(rows,a.cache,a.device)
     te=np.where(split=="test")[0]; zero={};zero_correct={}
     for k,name in enumerate(CONDITIONS):
