@@ -13,12 +13,14 @@ The fixed tasks are `multiple_subjects`, `outdoor`, `human_present`,
 `animal_present`, `dynamic_scene`, and `night`. Each is binary and is modeled
 with its own logit. The project deliberately distinguishes three things:
 
-1. Weak-label quality: agreement and Cohen's kappa against 180 human-reviewed
-   examples, each with a 95% bootstrap interval.
-2. Classifier quality: accuracy and calibration against human labels, not
-   merely agreement with its training targets.
+1. Weak-label quality: source agreement across rules, Qwen2.5, and image-only
+   CLIP, plus independent COCO silver-label evaluation where instance
+   annotations support the task.
+2. Classifier quality: accuracy and calibration against COCO silver labels for
+   `human_present`, `animal_present`, and `multiple_subjects`, rather than
+   merely agreement with training targets.
 3. The preregistered finding: whether three-source disagreement concentrates
-   in the low-sharpness, low-texture slice, and whether entropy-targeted human
+   in the low-sharpness, low-texture slice, and whether entropy-targeted silver
    correction beats equally sized random correction.
 
 No result numbers are checked into this README. Reports and figures are written
@@ -54,8 +56,9 @@ python scripts/run_rule_labeler.py data/processed/manifest.jsonl data/processed/
 python scripts/make_human_validation.py data/processed/manifest.jsonl data/annotations/human_validation.csv
 ```
 
-Complete every task cell in the CSV with `0` or `1`, without consulting weak
-labels. Then measure Stage 1:
+Optional genuine human validation remains supported. Complete every task cell
+in the CSV with `0` or `1`, without consulting weak labels, and then measure
+Stage 1 with:
 
 ```bash
 python scripts/evaluate_weak_labels.py \
@@ -103,12 +106,35 @@ and input-manifest SHA-256 before they are accepted into `results/`.
 
 ## Honest status
 
-The annotation-free COCO experiment has been run end to end. Generated reports
-under `results/` contain all empirical values and uncertainty intervals. Three
-tasks have independent silver ground truth from COCO's original human instance
-annotations; the remaining three have source-agreement evidence only. A new
-six-task manual review would strengthen the study but is not represented as
-having occurred.
+All experiments defined in the committed locked plans have been run end to end.
+Generated reports under `results/` contain the empirical values and uncertainty
+intervals. No new human annotation was performed or claimed. Three tasks have
+independent silver ground truth from COCO's original human instance annotations;
+the remaining three have source-agreement evidence only.
+
+The powered Stage 3 follow-up preserved the original blur and texture
+thresholds, expanded the flagged slice prospectively, and did not support the
+registered hypothesis that weak-label disagreement concentrates in that slice.
+The exact estimate, interval, sample counts, and power calculation are in
+[`stage3_powered_followup.json`](results/stage3_powered_followup.json) and
+[`stage3_power.json`](results/stage3_power.json).
+
+### Completed training
+
+- ResNet-18 multilabel classifier trained on the three-source weak-label
+  ensemble, followed by held-out temperature calibration.
+- Human-preference reward model evaluated with five grouped out-of-fold fits.
+- Active-correction classifiers retrained for targeted and random policies at
+  every registered budget and seed.
+- Random-negative, hard-only, and object-disjoint mixed-negative retrieval
+  adapters trained across the registered seeds.
+- Mean-pooled and temporal-convolution classifiers trained for 30 epochs across
+  five seeds on official UCF101 split 1.
+
+Training a full CogVideoX or VideoMAE backbone is outside this repository's
+completed scope. The natural-video experiment trains a temporal adapter over
+frozen CLIP frame embeddings; it is not represented as foundation-model
+pretraining or full-parameter video-model fine-tuning.
 
 ### Annotation-free evaluation
 
@@ -145,8 +171,18 @@ python scripts/render_research_sequence.py
 The additive [follow-up plan](FOLLOWUP_RESEARCH_PLAN.md) fixes an official
 UCF101 split-1 subset, a frozen-CLIP temporal adapter, object-disjoint retrieval
 negatives, multi-objective active acquisition, and official SugarCrepe
-evaluation. Results are generated into `results/followup/`; raw benchmark media
-and frozen embedding caches remain outside Git.
+evaluation. It has been completed. The generated
+[follow-up report](results/followup/REPORT.md) is the numerical source of truth;
+the adjacent [data card](results/followup/DATA_CARD.md) records dataset scope and
+limitations. Raw benchmark media and frozen embedding caches remain outside Git.
+
+The follow-up found a blur-robustness improvement from the temporal adapter but
+no clean-accuracy improvement at the classification ceiling. Object-verified
+mixed negatives still underperformed random negatives. Multi-objective active
+acquisition helped at the smaller registered budget but not the larger one, and
+SugarCrepe exposed substantially weaker swap reasoning than add or replace
+reasoning. Exact values and confidence intervals remain in the generated report
+rather than duplicated here.
 
 ```bash
 # CPU follow-ups over the existing COCO artifacts
@@ -159,3 +195,20 @@ python scripts/run_natural_video_followup.py --help
 python scripts/run_sugarcrepe.py --help
 python scripts/render_followup_report.py
 ```
+
+## Result map
+
+| Question | Locked design | Generated evidence |
+|---|---|---|
+| Initial weak-supervision stages | [PREREGISTRATION.md](PREREGISTRATION.md) | [`results/`](results/) |
+| Powered quality-slice hypothesis | [PREREGISTRATION_FOLLOWUP.md](PREREGISTRATION_FOLLOWUP.md) | [`stage3_powered_followup.json`](results/stage3_powered_followup.json) |
+| Six-sequence multimodal program | [RESEARCH_SEQUENCE_PLAN.md](RESEARCH_SEQUENCE_PLAN.md) | [Six-sequence report](results/research_sequence/REPORT.md) |
+| Natural video and compositionality | [FOLLOWUP_RESEARCH_PLAN.md](FOLLOWUP_RESEARCH_PLAN.md) | [Follow-up report](results/followup/REPORT.md) |
+
+## Reproducibility boundary
+
+Committed JSON contains model identifiers, seeds, trial outputs, input hashes,
+decode failures, and uncertainty calculations. COCO images, UCF101 videos,
+model weights, and frozen embedding caches are intentionally excluded from Git.
+Every reported table regenerates from a named script; result values should not
+be edited directly in this README.
