@@ -1,0 +1,495 @@
+{
+  "schema_version": 1,
+  "plan": "FOLLOWUP_RESEARCH_PLAN.md",
+  "git_commit": "e64471ef40d0204032955bd5af27afca9e49374a",
+  "execution_checkout": "9a52e9c027b4caf61a3dfd7144dbfa91477edaf0",
+  "classes": [
+    "Basketball",
+    "Biking",
+    "Diving",
+    "Drumming",
+    "HorseRiding",
+    "PlayingGuitar",
+    "RockClimbingIndoor",
+    "Rowing",
+    "Skiing",
+    "TaiChi"
+  ],
+  "conditions": [
+    "clean",
+    "reverse",
+    "frame_drop",
+    "blur",
+    "darkening"
+  ],
+  "caps": {
+    "train": 70,
+    "test": 30
+  },
+  "sampled_frames": 16,
+  "model_id": "open_clip:ViT-B-32:laion2b_s34b_b79k",
+  "archive_sha256": "ca8dfadb4c891cb11316f94d52b6b0ac2a11994e67a0cae227180cd160bd8e55",
+  "split_archive_sha256": "5c0d1a53b8ed364a2ac830a73f405e51bece7d98ce1254fd19ed4a36b224bd27",
+  "n_requested": 998,
+  "n_decoded": 987,
+  "decode_failures": [
+    {
+      "split": "train",
+      "class": "Basketball",
+      "label": 0,
+      "relative_path": "Basketball/v_Basketball_g12_c01.avi"
+    },
+    {
+      "split": "train",
+      "class": "Basketball",
+      "label": 0,
+      "relative_path": "Basketball/v_Basketball_g13_c04.avi"
+    },
+    {
+      "split": "train",
+      "class": "Basketball",
+      "label": 0,
+      "relative_path": "Basketball/v_Basketball_g16_c01.avi"
+    },
+    {
+      "split": "train",
+      "class": "Basketball",
+      "label": 0,
+      "relative_path": "Basketball/v_Basketball_g16_c02.avi"
+    },
+    {
+      "split": "train",
+      "class": "Basketball",
+      "label": 0,
+      "relative_path": "Basketball/v_Basketball_g16_c03.avi"
+    },
+    {
+      "split": "train",
+      "class": "Basketball",
+      "label": 0,
+      "relative_path": "Basketball/v_Basketball_g16_c04.avi"
+    },
+    {
+      "split": "train",
+      "class": "Basketball",
+      "label": 0,
+      "relative_path": "Basketball/v_Basketball_g16_c05.avi"
+    },
+    {
+      "split": "train",
+      "class": "Basketball",
+      "label": 0,
+      "relative_path": "Basketball/v_Basketball_g16_c06.avi"
+    },
+    {
+      "split": "train",
+      "class": "Basketball",
+      "label": 0,
+      "relative_path": "Basketball/v_Basketball_g18_c05.avi"
+    },
+    {
+      "split": "train",
+      "class": "HorseRiding",
+      "label": 4,
+      "relative_path": "HorseRiding/v_HorseRiding_g15_c01.avi"
+    },
+    {
+      "split": "test",
+      "class": "Diving",
+      "label": 2,
+      "relative_path": "Diving/v_Diving_g03_c03.avi"
+    }
+  ],
+  "decode_failures_by_slice": {
+    "train": {
+      "Basketball": 9,
+      "HorseRiding": 1
+    },
+    "test": {
+      "Diving": 1
+    }
+  },
+  "zero_shot": {
+    "clean": {
+      "accuracy": 0.9966329966329966,
+      "n": 297
+    },
+    "reverse": {
+      "accuracy": 0.9966329966329966,
+      "n": 297,
+      "accuracy_delta_from_clean": {
+        "estimate": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "n": 297,
+        "n_trials": 1
+      }
+    },
+    "frame_drop": {
+      "accuracy": 0.9966329966329966,
+      "n": 297,
+      "accuracy_delta_from_clean": {
+        "estimate": 0.0,
+        "ci95": [
+          0.0,
+          0.0
+        ],
+        "n": 297,
+        "n_trials": 1
+      }
+    },
+    "blur": {
+      "accuracy": 0.9427609427609428,
+      "n": 297,
+      "accuracy_delta_from_clean": {
+        "estimate": -0.05387205387205387,
+        "ci95": [
+          -0.08417508417508418,
+          -0.026936026936026935
+        ],
+        "n": 297,
+        "n_trials": 1
+      }
+    },
+    "darkening": {
+      "accuracy": 0.9932659932659933,
+      "n": 297,
+      "accuracy_delta_from_clean": {
+        "estimate": -0.003367003367003367,
+        "ci95": [
+          -0.010101010101010102,
+          0.0
+        ],
+        "n": 297,
+        "n_trials": 1
+      }
+    }
+  },
+  "trials": [
+    {
+      "seed": 11,
+      "mean": {
+        "clean": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "reverse": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "frame_drop": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "blur": {
+          "accuracy": 0.9528619647026062,
+          "worst_class_recall": 0.800000011920929
+        },
+        "darkening": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        }
+      },
+      "temporal": {
+        "clean": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "reverse": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "frame_drop": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "blur": {
+          "accuracy": 0.9629629850387573,
+          "worst_class_recall": 0.800000011920929
+        },
+        "darkening": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        }
+      }
+    },
+    {
+      "seed": 22,
+      "mean": {
+        "clean": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "reverse": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "frame_drop": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "blur": {
+          "accuracy": 0.9494949579238892,
+          "worst_class_recall": 0.7666666507720947
+        },
+        "darkening": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        }
+      },
+      "temporal": {
+        "clean": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "reverse": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "frame_drop": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "blur": {
+          "accuracy": 0.9663299918174744,
+          "worst_class_recall": 0.8333333134651184
+        },
+        "darkening": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        }
+      }
+    },
+    {
+      "seed": 33,
+      "mean": {
+        "clean": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "reverse": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "frame_drop": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "blur": {
+          "accuracy": 0.9528619647026062,
+          "worst_class_recall": 0.7666666507720947
+        },
+        "darkening": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        }
+      },
+      "temporal": {
+        "clean": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "reverse": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "frame_drop": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "blur": {
+          "accuracy": 0.9562289714813232,
+          "worst_class_recall": 0.800000011920929
+        },
+        "darkening": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        }
+      }
+    },
+    {
+      "seed": 44,
+      "mean": {
+        "clean": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "reverse": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "frame_drop": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "blur": {
+          "accuracy": 0.9562289714813232,
+          "worst_class_recall": 0.800000011920929
+        },
+        "darkening": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        }
+      },
+      "temporal": {
+        "clean": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "reverse": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "frame_drop": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "blur": {
+          "accuracy": 0.9629629850387573,
+          "worst_class_recall": 0.800000011920929
+        },
+        "darkening": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        }
+      }
+    },
+    {
+      "seed": 55,
+      "mean": {
+        "clean": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "reverse": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "frame_drop": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "blur": {
+          "accuracy": 0.9494949579238892,
+          "worst_class_recall": 0.7666666507720947
+        },
+        "darkening": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        }
+      },
+      "temporal": {
+        "clean": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "reverse": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "frame_drop": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        },
+        "blur": {
+          "accuracy": 0.9629629850387573,
+          "worst_class_recall": 0.800000011920929
+        },
+        "darkening": {
+          "accuracy": 1.0,
+          "worst_class_recall": 1.0
+        }
+      }
+    }
+  ],
+  "paired_deltas_temporal_minus_mean": {
+    "clean": {
+      "estimate": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "trial_deltas": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "n_trials": 5
+    },
+    "reverse": {
+      "estimate": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "trial_deltas": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "n_trials": 5
+    },
+    "frame_drop": {
+      "estimate": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "trial_deltas": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "n_trials": 5
+    },
+    "blur": {
+      "estimate": 0.010101020336151123,
+      "ci95": [
+        0.006060612201690674,
+        0.014141428470611572
+      ],
+      "trial_deltas": [
+        0.010101020336151123,
+        0.016835033893585205,
+        0.003367006778717041,
+        0.006734013557434082,
+        0.013468027114868164
+      ],
+      "n_trials": 5
+    },
+    "darkening": {
+      "estimate": 0.0,
+      "ci95": [
+        0.0,
+        0.0
+      ],
+      "trial_deltas": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "n_trials": 5
+    }
+  },
+  "n_trials": 5,
+  "seeds": [
+    11,
+    22,
+    33,
+    44,
+    55
+  ],
+  "torch": "2.11.0+cu128",
+  "device": "NVIDIA GeForce RTX 3070",
+  "python": "3.11.9"
+}
