@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-import argparse, hashlib, json, platform
+import argparse, hashlib, json, platform, subprocess
 from pathlib import Path
 import numpy as np
 from sklearn.linear_model import LogisticRegression
@@ -158,7 +158,9 @@ def sequence6(z,root):
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument("--embeddings",type=Path,required=True); ap.add_argument("--processed-dir",type=Path,required=True); ap.add_argument("--output-dir",type=Path,default=Path("results/research_sequence")); a=ap.parse_args()
     z=np.load(a.embeddings); a.output_dir.mkdir(parents=True,exist_ok=True)
-    common={"schema_version":1,"plan":"RESEARCH_SEQUENCE_PLAN.md","embedding_sha256":sha(a.embeddings),
+    try: commit=subprocess.check_output(["git","rev-parse","HEAD"],text=True,stderr=subprocess.DEVNULL).strip()
+    except Exception: commit=None
+    common={"schema_version":1,"plan":"RESEARCH_SEQUENCE_PLAN.md","git_commit":commit,"embedding_sha256":sha(a.embeddings),
             "embedding_metadata":json.loads(str(z["metadata"])),"python":platform.python_version(),"bootstrap_replicates":10000,
             "seeds":SEEDS}
     for number,fn in [(3,lambda:sequence3(z)),(4,lambda:sequence4(z,a.processed_dir)),(5,lambda:sequence5(z)),(6,lambda:sequence6(z,a.processed_dir))]:
